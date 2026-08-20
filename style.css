@@ -585,13 +585,17 @@ nav a:hover{
 ========================= */
 
 .downloads-section{
+  width:100%;
   max-width:1400px;
+  margin:0 auto;
   position:relative;
 }
 
+/* DOWNLOAD TABS */
 .download-tabs{
   display:flex;
   justify-content:center;
+  align-items:center;
   flex-wrap:wrap;
   gap:8px;
   margin:0 auto 35px;
@@ -608,13 +612,13 @@ nav a:hover{
   background:transparent;
   color:#777;
   padding:12px 20px;
-  font-family:Orbitron;
+  font-family:Orbitron,sans-serif;
   font-size:10px;
   font-weight:800;
   letter-spacing:.8px;
   cursor:pointer;
   border-radius:3px;
-  transition:.2s;
+  transition:.2s ease;
 }
 
 .download-tab:hover{
@@ -629,29 +633,37 @@ nav a:hover{
   box-shadow:0 0 20px rgba(227,38,38,.15);
 }
 
+/* TAB CONTENT */
 .download-tab-content{
   display:none;
+  width:100%;
 }
 
 .download-tab-content.active{
-  display:grid;
+  display:block;
 }
 
+/* DOWNLOAD GRID */
 .download-grid{
-  grid-template-columns:repeat(3,1fr);
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
   gap:18px;
+  width:100%;
 }
 
+/* DOWNLOAD CARD */
 .download-card{
   position:relative;
   display:flex;
   flex-direction:column;
+  min-width:0;
   min-height:300px;
   padding:30px;
   background:linear-gradient(145deg,#101010,#080808);
   border:1px solid #292929;
   border-radius:6px;
-  transition:.25s;
+  transition:.25s ease;
+  overflow:hidden;
 }
 
 .download-card:hover{
@@ -665,9 +677,11 @@ nav a:hover{
   box-shadow:0 15px 55px rgba(227,38,38,.08);
 }
 
+/* DOWNLOAD ICON */
 .download-icon{
   width:55px;
   height:55px;
+  flex-shrink:0;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -675,22 +689,23 @@ nav a:hover{
   border:1px solid #4b1515;
   background:#150808;
   color:#e32626;
-  font-family:Orbitron;
+  font-family:Orbitron,sans-serif;
   font-size:17px;
   font-weight:900;
   border-radius:5px;
 }
 
+/* DOWNLOAD INFO */
 .download-type{
   color:#e32626;
-  font-family:Orbitron;
+  font-family:Orbitron,sans-serif;
   font-size:9px;
   font-weight:800;
   letter-spacing:1.5px;
 }
 
 .download-info h3{
-  font-family:Orbitron;
+  font-family:Orbitron,sans-serif;
   font-size:17px;
   margin:9px 0 12px;
 }
@@ -709,8 +724,11 @@ nav a:hover{
   letter-spacing:.5px;
 }
 
+/* DOWNLOAD BUTTON */
 .download-btn{
   display:block;
+  width:100%;
+  box-sizing:border-box;
   margin-top:auto;
   padding:13px 15px;
   text-align:center;
@@ -722,7 +740,7 @@ nav a:hover{
   font-size:11px;
   font-weight:900;
   letter-spacing:.8px;
-  transition:.2s;
+  transition:.2s ease;
 }
 
 .download-btn:hover{
@@ -730,8 +748,10 @@ nav a:hover{
   box-shadow:0 0 25px rgba(227,38,38,.2);
 }
 
+/* EMPTY DOWNLOAD */
 .empty-download{
   min-height:230px;
+  display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
@@ -747,7 +767,7 @@ nav a:hover{
 }
 
 .empty-download h3{
-  font-family:Orbitron;
+  font-family:Orbitron,sans-serif;
   font-size:16px;
   margin:5px 0 10px;
 }
@@ -758,6 +778,49 @@ nav a:hover{
   margin:0;
 }
 
+/* TABLET */
+@media (max-width:1000px){
+  .download-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+/* MOBILE */
+@media (max-width:650px){
+  .downloads-section{
+    padding-left:15px;
+    padding-right:15px;
+    box-sizing:border-box;
+  }
+
+  .download-tabs{
+    width:100%;
+    box-sizing:border-box;
+    justify-content:flex-start;
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    scrollbar-width:none;
+  }
+
+  .download-tabs::-webkit-scrollbar{
+    display:none;
+  }
+
+  .download-tab{
+    flex-shrink:0;
+    padding:11px 16px;
+  }
+
+  .download-grid{
+    grid-template-columns:1fr;
+    gap:15px;
+  }
+
+  .download-card{
+    min-height:280px;
+    padding:24px;
+  }
+}
 
 /* =========================
    FAQ
