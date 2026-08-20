@@ -16,29 +16,28 @@
         body {
             font-family: Arial, sans-serif;
             background: #050505;
-            color: #ffffff;
+            color: #fff;
             min-height: 100vh;
         }
 
         .header {
             text-align: center;
-            padding: 55px 20px 30px;
+            padding: 50px 20px 30px;
         }
 
-        .logo-text {
+        .eyebrow {
             color: #ff1e1e;
-            font-size: 15px;
+            font-size: 13px;
             font-weight: bold;
-            letter-spacing: 4px;
-            margin-bottom: 12px;
-        }
-
-        .header h1 {
-            font-size: 42px;
             letter-spacing: 2px;
         }
 
-        .header h1 span {
+        .header h1 {
+            margin-top: 12px;
+            font-size: 42px;
+        }
+
+        .header h1 strong {
             color: #ff1e1e;
         }
 
@@ -50,7 +49,8 @@
         .container {
             width: 92%;
             max-width: 1050px;
-            margin: 25px auto 70px;
+            margin: auto;
+            padding-bottom: 70px;
         }
 
         /* TABS */
@@ -60,18 +60,17 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 10px;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
         }
 
         .download-tab {
-            background: #101010;
+            background: #111;
             color: #aaa;
             border: 1px solid #292929;
             padding: 11px 20px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
-            transition: 0.2s;
         }
 
         .download-tab:hover,
@@ -81,7 +80,7 @@
             border-color: #e60000;
         }
 
-        /* CONTENT */
+        /* TAB CONTENT */
 
         .download-tab-content {
             display: none;
@@ -91,7 +90,7 @@
             display: block;
         }
 
-        /* CARD */
+        /* CARDS */
 
         .download-card {
             display: flex;
@@ -102,13 +101,6 @@
             border-radius: 15px;
             padding: 24px;
             margin-bottom: 18px;
-            box-shadow: 0 0 22px rgba(255, 0, 0, 0.07);
-            transition: 0.2s;
-        }
-
-        .download-card:hover {
-            border-color: #e60000;
-            transform: translateY(-2px);
         }
 
         .download-icon {
@@ -118,7 +110,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #1a1a1a;
+            background: #181818;
             border: 1px solid #333;
             border-radius: 12px;
             color: #ff1e1e;
@@ -138,7 +130,7 @@
         }
 
         .download-info h2 {
-            margin: 5px 0 8px;
+            margin: 6px 0 8px;
             font-size: 20px;
         }
 
@@ -161,12 +153,10 @@
             border-radius: 8px;
             font-weight: bold;
             white-space: nowrap;
-            transition: 0.2s;
         }
 
         .download-btn:hover {
             background: #ff2929;
-            transform: translateY(-2px);
         }
 
         /* EMPTY */
@@ -204,7 +194,6 @@
             border: 1px solid #333;
             padding: 11px 22px;
             border-radius: 8px;
-            transition: 0.2s;
         }
 
         .back-btn:hover {
@@ -216,10 +205,6 @@
 
         @media (max-width: 650px) {
 
-            .header {
-                padding-top: 40px;
-            }
-
             .header h1 {
                 font-size: 30px;
             }
@@ -227,22 +212,11 @@
             .download-card {
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 20px;
-            }
-
-            .download-icon {
-                width: 50px;
-                height: 50px;
-                min-width: 50px;
             }
 
             .download-btn {
                 width: 100%;
                 text-align: center;
-            }
-
-            .download-tabs {
-                gap: 7px;
             }
 
             .download-tab {
@@ -255,450 +229,446 @@
 
 <body>
 
-    <header class="header">
+<header class="header">
 
-        <div class="logo-text">
-            PRIME LEADER OFFICIAL
-        </div>
+    <span class="eyebrow">
+        PRIME LEADER DOWNLOADS
+    </span>
 
-        <h1>
-            DOWNLOAD <span>TOOLS.</span>
-        </h1>
+    <h1>
+        DOWNLOAD <strong>TOOLS.</strong>
+    </h1>
 
-        <p>
-            Official PRIME LEADER downloads and recommended software.
-        </p>
+    <p>
+        Recommended emulators, MSI versions and official
+        PRIME LEADER software.
+    </p>
 
-    </header>
-
-
-    <main class="container">
+</header>
 
 
-        <!-- ========================= -->
-        <!-- DOWNLOAD TABS -->
-        <!-- ========================= -->
-
-        <div class="download-tabs">
-
-            <button
-                class="download-tab active"
-                onclick="showDownloadTab('emulators', this)"
-            >
-                EMULATORS
-            </button>
-
-            <button
-                class="download-tab"
-                onclick="showDownloadTab('msi', this)"
-            >
-                MSI
-            </button>
-
-            <button
-                class="download-tab"
-                onclick="showDownloadTab('software', this)"
-            >
-                SOFTWARE
-            </button>
-
-            <button
-                class="download-tab"
-                onclick="showDownloadTab('drivers', this)"
-            >
-                DRIVERS
-            </button>
-
-            <button
-                class="download-tab"
-                onclick="showDownloadTab('tools', this)"
-            >
-                TOOLS
-            </button>
-
-        </div>
+<main class="container">
 
 
-        <!-- ========================= -->
-        <!-- EMULATORS -->
-        <!-- ========================= -->
+    <!-- DOWNLOAD TABS -->
 
-        <div
-            id="emulators"
-            class="download-tab-content active"
+    <div class="download-tabs">
+
+        <button
+            class="download-tab active"
+            onclick="showDownloadTab('emulators', this)"
         >
+            EMULATORS
+        </button>
 
-            <!-- INFERNOX -->
-
-            <article class="download-card">
-
-                <div class="download-icon">
-                    ▣
-                </div>
-
-                <div class="download-info">
-
-                    <span class="download-type">
-                        EMULATOR
-                    </span>
-
-                    <h2>
-                        INFERNOX EMULATOR
-                    </h2>
-
-                    <p>
-                        InfernoX Emulator version 5.22.75.6322
-                        for Windows.
-                    </p>
-
-                    <small>
-                        Version 5.22.75.6322 • EXE
-                    </small>
-
-                </div>
-
-                <a
-                    class="download-btn"
-                    href="https://www.mediafire.com/file/z7jyfhz9tbob7vb/InfernoXInstaller_5.22.75.6322.exe/file"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    DOWNLOAD ↗
-                </a>
-
-            </article>
-
-
-            <!-- E4VX -->
-
-            <article class="download-card">
-
-                <div class="download-icon">
-                    ◈
-                </div>
-
-                <div class="download-info">
-
-                    <span class="download-type">
-                        EMULATOR
-                    </span>
-
-                    <h2>
-                        E4VX LITE VERSION
-                    </h2>
-
-                    <p>
-                        Lightweight E4VX version prepared for a clean
-                        emulator setup.
-                    </p>
-
-                    <small>
-                        4.240.30.1002 • 7Z
-                    </small>
-
-                </div>
-
-                <a
-                    class="download-btn"
-                    href="https://www.mediafire.com/file/eo00y9m2dq2i210/4.240.30.1002_e4v.7z/file"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    DOWNLOAD ↗
-                </a>
-
-            </article>
-
-
-            <!-- BLUESTACKS -->
-
-            <article class="download-card">
-
-                <div class="download-icon">
-                    ▣
-                </div>
-
-                <div class="download-info">
-
-                    <span class="download-type">
-                        EMULATOR
-                    </span>
-
-                    <h2>
-                        BLUESTACKS 4
-                    </h2>
-
-                    <p>
-                        BlueStacks 4 emulator package for Windows.
-                    </p>
-
-                    <small>
-                        Version 4.240.30.1002 • EXE
-                    </small>
-
-                </div>
-
-                <a
-                    class="download-btn"
-                    href="https://www.mediafire.com/file/gtl106ooopxzeah/BlueStacks_4.240.30.1002.exe/file"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    DOWNLOAD ↗
-                </a>
-
-            </article>
-
-        </div>
-
-
-        <!-- ========================= -->
-        <!-- MSI -->
-        <!-- ========================= -->
-
-        <div
-            id="msi"
-            class="download-tab-content"
+        <button
+            class="download-tab"
+            onclick="showDownloadTab('msi', this)"
         >
+            MSI
+        </button>
 
-            <!-- MSI 5.9 -->
-
-            <article class="download-card">
-
-                <div class="download-icon">
-                    M
-                </div>
-
-                <div class="download-info">
-
-                    <span class="download-type">
-                        MSI
-                    </span>
-
-                    <h2>
-                        MSI 5.9
-                    </h2>
-
-                    <p>
-                        MSI 5.9 emulator package for your gaming setup.
-                    </p>
-
-                    <small>
-                        EXE • Windows
-                    </small>
-
-                </div>
-
-                <a
-                    class="download-btn"
-                    href="https://www.mediafire.com/file/pj1p1ff1l7qvpdi/MSI+5.9.exe/file"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    DOWNLOAD ↗
-                </a>
-
-            </article>
-
-
-            <!-- MSI 5.12 -->
-
-            <article class="download-card">
-
-                <div class="download-icon">
-                    M
-                </div>
-
-                <div class="download-info">
-
-                    <span class="download-type">
-                        MSI
-                    </span>
-
-                    <h2>
-                        MSI 5.12
-                    </h2>
-
-                    <p>
-                        MSI 5.12 emulator package.
-                    </p>
-
-                    <small>
-                        Google Drive • Windows
-                    </small>
-
-                </div>
-
-                <a
-                    class="download-btn"
-                    href="https://drive.google.com/file/d/1_yPWfSO0hyqOJmPfg_Dm4sCP9KgoHUV_/view?pli=1"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    DOWNLOAD ↗
-                </a>
-
-            </article>
-
-        </div>
-
-
-        <!-- ========================= -->
-        <!-- SOFTWARE -->
-        <!-- ========================= -->
-
-        <div
-            id="software"
-            class="download-tab-content"
+        <button
+            class="download-tab"
+            onclick="showDownloadTab('software', this)"
         >
+            SOFTWARE
+        </button>
 
-            <article class="download-card">
-
-                <div class="download-icon">
-                    PL
-                </div>
-
-                <div class="download-info">
-
-                    <span class="download-type">
-                        OFFICIAL SOFTWARE
-                    </span>
-
-                    <h2>
-                        PRIME LEADER V1
-                    </h2>
-
-                    <p>
-                        Official PRIME LEADER performance optimization
-                        software.
-                    </p>
-
-                    <small>
-                        PRIME LEADER • Google Drive
-                    </small>
-
-                </div>
-
-                <a
-                    class="download-btn"
-                    href="https://drive.google.com/file/d/1MeRd8eUYaRFuOmLR4dDAcZhdltIxqQ2-/view?usp=drive_link"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    DOWNLOAD ↗
-                </a>
-
-            </article>
-
-        </div>
-
-
-        <!-- ========================= -->
-        <!-- DRIVERS -->
-        <!-- ========================= -->
-
-        <div
-            id="drivers"
-            class="download-tab-content"
+        <button
+            class="download-tab"
+            onclick="showDownloadTab('drivers', this)"
         >
+            DRIVERS
+        </button>
 
-            <div class="empty-download">
-
-                <div class="empty-icon">
-                    ⚙
-                </div>
-
-                <h2>
-                    DRIVERS COMING SOON
-                </h2>
-
-                <p>
-                    Driver downloads will be added here soon.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- ========================= -->
-        <!-- TOOLS -->
-        <!-- ========================= -->
-
-        <div
-            id="tools"
-            class="download-tab-content"
+        <button
+            class="download-tab"
+            onclick="showDownloadTab('tools', this)"
         >
+            TOOLS
+        </button>
 
-            <div class="empty-download">
-
-                <div class="empty-icon">
-                    ◈
-                </div>
-
-                <h2>
-                    TOOLS COMING SOON
-                </h2>
-
-                <p>
-                    More performance tools will be added here soon.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- BACK -->
-
-        <a
-            class="back-btn"
-            href="index.html"
-        >
-            ← BACK TO HOME
-        </a>
-
-    </main>
+    </div>
 
 
     <!-- ========================= -->
-    <!-- TAB SCRIPT -->
+    <!-- EMULATORS -->
     <!-- ========================= -->
 
-    <script>
+    <div
+        id="emulators"
+        class="download-tab-content active"
+    >
 
-        function showDownloadTab(tabId, button) {
+        <!-- INFERNOX -->
 
-            const contents =
-                document.querySelectorAll(
-                    '.download-tab-content'
-                );
+        <article class="download-card">
 
-            contents.forEach(function(content) {
-                content.classList.remove('active');
-            });
+            <div class="download-icon">
+                ▣
+            </div>
+
+            <div class="download-info">
+
+                <span class="download-type">
+                    EMULATOR
+                </span>
+
+                <h2>
+                    INFERNOX EMULATOR
+                </h2>
+
+                <p>
+                    InfernoX Emulator version 5.22.75.6322
+                    for Windows.
+                </p>
+
+                <small>
+                    Version 5.22.75.6322 • EXE
+                </small>
+
+            </div>
+
+            <a
+                class="download-btn"
+                href="https://www.mediafire.com/file/z7jyfhz9tbob7vb/InfernoXInstaller_5.22.75.6322.exe/file"
+                target="_blank"
+                rel="noopener"
+            >
+                DOWNLOAD ↗
+            </a>
+
+        </article>
 
 
-            const tabs =
-                document.querySelectorAll(
-                    '.download-tab'
-                );
+        <!-- E4VX -->
 
-            tabs.forEach(function(tab) {
-                tab.classList.remove('active');
-            });
+        <article class="download-card">
+
+            <div class="download-icon">
+                ◈
+            </div>
+
+            <div class="download-info">
+
+                <span class="download-type">
+                    EMULATOR
+                </span>
+
+                <h2>
+                    E4VX LITE VERSION
+                </h2>
+
+                <p>
+                    Lightweight E4VX version prepared for a clean
+                    emulator setup.
+                </p>
+
+                <small>
+                    4.240.30.1002 • 7Z
+                </small>
+
+            </div>
+
+            <a
+                class="download-btn"
+                href="https://www.mediafire.com/file/eo00y9m2dq2i210/4.240.30.1002_e4v.7z/file"
+                target="_blank"
+                rel="noopener"
+            >
+                DOWNLOAD ↗
+            </a>
+
+        </article>
 
 
-            document
-                .getElementById(tabId)
-                .classList.add('active');
+        <!-- BLUESTACKS -->
+
+        <article class="download-card">
+
+            <div class="download-icon">
+                ▣
+            </div>
+
+            <div class="download-info">
+
+                <span class="download-type">
+                    EMULATOR
+                </span>
+
+                <h2>
+                    BLUESTACKS 4
+                </h2>
+
+                <p>
+                    BlueStacks 4 emulator package for Windows.
+                </p>
+
+                <small>
+                    Version 4.240.30.1002 • EXE
+                </small>
+
+            </div>
+
+            <a
+                class="download-btn"
+                href="https://www.mediafire.com/file/gtl106ooopxzeah/BlueStacks_4.240.30.1002.exe/file"
+                target="_blank"
+                rel="noopener"
+            >
+                DOWNLOAD ↗
+            </a>
+
+        </article>
+
+    </div>
 
 
-            button.classList.add('active');
+    <!-- ========================= -->
+    <!-- MSI -->
+    <!-- ========================= -->
 
-        }
+    <div
+        id="msi"
+        class="download-tab-content"
+    >
 
-    </script>
+        <!-- MSI 5.9 -->
+
+        <article class="download-card">
+
+            <div class="download-icon">
+                M
+            </div>
+
+            <div class="download-info">
+
+                <span class="download-type">
+                    MSI
+                </span>
+
+                <h2>
+                    MSI 5.9
+                </h2>
+
+                <p>
+                    MSI 5.9 emulator package for your gaming setup.
+                </p>
+
+                <small>
+                    EXE • Windows
+                </small>
+
+            </div>
+
+            <a
+                class="download-btn"
+                href="https://www.mediafire.com/file/pj1p1ff1l7qvpdi/MSI+5.9.exe/file"
+                target="_blank"
+                rel="noopener"
+            >
+                DOWNLOAD ↗
+            </a>
+
+        </article>
+
+
+        <!-- MSI 5.12 -->
+
+        <article class="download-card">
+
+            <div class="download-icon">
+                M
+            </div>
+
+            <div class="download-info">
+
+                <span class="download-type">
+                    MSI
+                </span>
+
+                <h2>
+                    MSI 5.12
+                </h2>
+
+                <p>
+                    MSI 5.12 emulator package.
+                </p>
+
+                <small>
+                    Google Drive • Windows
+                </small>
+
+            </div>
+
+            <a
+                class="download-btn"
+                href="https://drive.google.com/file/d/1_yPWfSO0hyqOJmPfg_Dm4sCP9KgoHUV_/view?pli=1"
+                target="_blank"
+                rel="noopener"
+            >
+                DOWNLOAD ↗
+            </a>
+
+        </article>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- SOFTWARE -->
+    <!-- ========================= -->
+
+    <div
+        id="software"
+        class="download-tab-content"
+    >
+
+        <article class="download-card">
+
+            <div class="download-icon">
+                PL
+            </div>
+
+            <div class="download-info">
+
+                <span class="download-type">
+                    OFFICIAL SOFTWARE
+                </span>
+
+                <h2>
+                    PRIME LEADER V1
+                </h2>
+
+                <p>
+                    Official PRIME LEADER performance optimization
+                    software.
+                </p>
+
+                <small>
+                    PRIME LEADER • Google Drive
+                </small>
+
+            </div>
+
+            <a
+                class="download-btn"
+                href="https://drive.google.com/file/d/1MeRd8eUYaRFuOmLR4dDAcZhdltIxqQ2-/view?usp=drive_link"
+                target="_blank"
+                rel="noopener"
+            >
+                DOWNLOAD ↗
+            </a>
+
+        </article>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- DRIVERS -->
+    <!-- ========================= -->
+
+    <div
+        id="drivers"
+        class="download-tab-content"
+    >
+
+        <div class="empty-download">
+
+            <div class="empty-icon">
+                ⚙
+            </div>
+
+            <h2>
+                DRIVERS COMING SOON
+            </h2>
+
+            <p>
+                Driver downloads will be added here soon.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- TOOLS -->
+    <!-- ========================= -->
+
+    <div
+        id="tools"
+        class="download-tab-content"
+    >
+
+        <div class="empty-download">
+
+            <div class="empty-icon">
+                ◈
+            </div>
+
+            <h2>
+                TOOLS COMING SOON
+            </h2>
+
+            <p>
+                More performance tools will be added here soon.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- BACK TO HOME -->
+
+    <a
+        class="back-btn"
+        href="index.html"
+    >
+        ← BACK TO HOME
+    </a>
+
+
+</main>
+
+
+<script>
+
+function showDownloadTab(tabId, button) {
+
+    const contents =
+        document.querySelectorAll(
+            '.download-tab-content'
+        );
+
+    contents.forEach(function(content) {
+        content.classList.remove('active');
+    });
+
+
+    const tabs =
+        document.querySelectorAll(
+            '.download-tab'
+        );
+
+    tabs.forEach(function(tab) {
+        tab.classList.remove('active');
+    });
+
+
+    document
+        .getElementById(tabId)
+        .classList.add('active');
+
+
+    button.classList.add('active');
+
+}
+
+</script>
 
 </body>
 </html>
