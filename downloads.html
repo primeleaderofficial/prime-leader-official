@@ -1,242 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Downloads | PRIME LEADER Official</title>
+<title>Downloads | PRIME LEADER Official</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #050505;
-            color: #fff;
-            min-height: 100vh;
-        }
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 50% -10%,rgba(230,0,0,.16),transparent 35%),
+        #050505;
+    color:#fff;
+    min-height:100vh;
+}
 
-        .header {
-            text-align: center;
-            padding: 50px 20px 30px;
-        }
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:linear-gradient(
+        rgba(255,255,255,.015) 1px,
+        transparent 1px
+    );
+    background-size:100% 4px;
+    opacity:.25;
+}
 
-        .eyebrow {
-            color: #ff1e1e;
-            font-size: 13px;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
+.header{
+    text-align:center;
+    padding:55px 20px 35px;
+}
 
-        .header h1 {
-            margin-top: 12px;
-            font-size: 42px;
-        }
+.brand{
+    display:inline-block;
+    color:#ff2020;
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:4px;
+    margin-bottom:15px;
+}
 
-        .header h1 strong {
-            color: #ff1e1e;
-        }
+.header h1{
+    font-size:46px;
+    letter-spacing:2px;
+    line-height:1.1;
+}
 
-        .header p {
-            color: #999;
-            margin-top: 12px;
-        }
+.header h1 span{
+    color:#ff1e1e;
+}
 
-        .container {
-            width: 92%;
-            max-width: 1050px;
-            margin: auto;
-            padding-bottom: 70px;
-        }
+.header p{
+    max-width:650px;
+    margin:15px auto 0;
+    color:#8e8e8e;
+    line-height:1.6;
+}
 
-        /* TABS */
+.container{
+    width:92%;
+    max-width:1050px;
+    margin:auto;
+    padding-bottom:70px;
+}
 
-        .download-tabs {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
+/* TABS */
 
-        .download-tab {
-            background: #111;
-            color: #aaa;
-            border: 1px solid #292929;
-            padding: 11px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+.download-tabs{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:9px;
+    padding:7px;
+    margin:0 auto 35px;
+    width:max-content;
+    max-width:100%;
+    background:#0b0b0b;
+    border:1px solid #282828;
+    border-radius:10px;
+}
 
-        .download-tab:hover,
-        .download-tab.active {
-            background: #e60000;
-            color: #fff;
-            border-color: #e60000;
-        }
+.download-tab{
+    border:1px solid transparent;
+    background:transparent;
+    color:#888;
+    padding:11px 19px;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.5px;
+    transition:.25s;
+}
 
-        /* TAB CONTENT */
+.download-tab:hover{
+    color:#fff;
+}
 
-        .download-tab-content {
-            display: none;
-        }
+.download-tab.active{
+    background:#e60000;
+    color:#fff;
+    box-shadow:0 5px 20px rgba(230,0,0,.22);
+}
 
-        .download-tab-content.active {
-            display: block;
-        }
+/* CONTENT */
 
-        /* CARDS */
+.download-tab-content{
+    display:none;
+}
 
-        .download-card {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            background: #101010;
-            border: 1px solid #292929;
-            border-radius: 15px;
-            padding: 24px;
-            margin-bottom: 18px;
-        }
+.download-tab-content.active{
+    display:block;
+    animation:fadeIn .25s ease;
+}
 
-        .download-icon {
-            width: 58px;
-            height: 58px;
-            min-width: 58px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #181818;
-            border: 1px solid #333;
-            border-radius: 12px;
-            color: #ff1e1e;
-            font-weight: bold;
-            font-size: 20px;
-        }
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(6px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 
-        .download-info {
-            flex: 1;
-        }
+/* CARD */
 
-        .download-type {
-            color: #ff3333;
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
+.download-card{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:25px;
+    margin-bottom:17px;
+    background:linear-gradient(145deg,#121212,#0b0b0b);
+    border:1px solid #292929;
+    border-radius:14px;
+    overflow:hidden;
+    transition:.25s;
+}
 
-        .download-info h2 {
-            margin: 6px 0 8px;
-            font-size: 20px;
-        }
+.download-card:before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:3px;
+    background:#e60000;
+    opacity:.5;
+}
 
-        .download-info p {
-            color: #999;
-            line-height: 1.5;
-            margin-bottom: 7px;
-        }
+.download-card:hover{
+    border-color:#e60000;
+    transform:translateY(-3px);
+    box-shadow:0 12px 35px rgba(0,0,0,.5);
+}
 
-        .download-info small {
-            color: #666;
-        }
+.download-icon{
+    width:62px;
+    height:62px;
+    min-width:62px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:13px;
+    background:#181818;
+    border:1px solid #343434;
+    color:#ff2020;
+    font-size:20px;
+    font-weight:900;
+}
 
-        .download-btn {
-            display: inline-block;
-            padding: 12px 22px;
-            background: #e60000;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            white-space: nowrap;
-        }
+.download-info{
+    flex:1;
+}
 
-        .download-btn:hover {
-            background: #ff2929;
-        }
+.download-type{
+    display:inline-block;
+    color:#ff2929;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1.5px;
+    margin-bottom:5px;
+}
 
-        /* EMPTY */
+.download-info h2{
+    font-size:20px;
+    margin-bottom:8px;
+}
 
-        .empty-download {
-            text-align: center;
-            background: #101010;
-            border: 1px solid #292929;
-            border-radius: 15px;
-            padding: 55px 20px;
-        }
+.download-info p{
+    color:#8d8d8d;
+    font-size:14px;
+    line-height:1.5;
+    margin-bottom:7px;
+}
 
-        .empty-icon {
-            font-size: 42px;
-            color: #e60000;
-            margin-bottom: 15px;
-        }
+.download-info small{
+    color:#555;
+    font-size:11px;
+}
 
-        .empty-download h2 {
-            margin-bottom: 10px;
-        }
+/* SOURCE */
 
-        .empty-download p {
-            color: #777;
-        }
+.source{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:10px;
+    padding:5px 9px;
+    border-radius:5px;
+    background:#181818;
+    border:1px solid #292929;
+    color:#aaa;
+    font-size:10px;
+    font-weight:bold;
+}
 
-        /* BACK */
+.source-dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#e60000;
+}
 
-        .back-btn {
-            display: block;
-            width: fit-content;
-            margin: 35px auto 0;
-            color: #aaa;
-            text-decoration: none;
-            border: 1px solid #333;
-            padding: 11px 22px;
-            border-radius: 8px;
-        }
+/* FEATURED */
 
-        .back-btn:hover {
-            color: #fff;
-            border-color: #e60000;
-        }
+.featured{
+    border-color:#6d1616;
+    box-shadow:0 0 30px rgba(230,0,0,.08);
+}
 
-        /* MOBILE */
+.featured-badge{
+    position:absolute;
+    right:18px;
+    top:15px;
+    padding:5px 9px;
+    border-radius:5px;
+    background:#e60000;
+    color:#fff;
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:1px;
+}
 
-        @media (max-width: 650px) {
+/* BUTTON */
 
-            .header h1 {
-                font-size: 30px;
-            }
+.download-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:125px;
+    padding:12px 20px;
+    background:#e60000;
+    color:#fff;
+    text-decoration:none;
+    border-radius:7px;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.4px;
+    transition:.2s;
+}
 
-            .download-card {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+.download-btn:hover{
+    background:#ff2929;
+    box-shadow:0 7px 22px rgba(230,0,0,.28);
+    transform:translateY(-2px);
+}
 
-            .download-btn {
-                width: 100%;
-                text-align: center;
-            }
+/* EMPTY */
 
-            .download-tab {
-                padding: 9px 13px;
-                font-size: 12px;
-            }
-        }
-    </style>
+.empty-download{
+    text-align:center;
+    padding:65px 20px;
+    background:#0d0d0d;
+    border:1px solid #292929;
+    border-radius:14px;
+}
+
+.empty-icon{
+    font-size:38px;
+    color:#e60000;
+    margin-bottom:15px;
+}
+
+.empty-download h2{
+    font-size:20px;
+    margin-bottom:9px;
+}
+
+.empty-download p{
+    color:#777;
+}
+
+/* BACK */
+
+.back-btn{
+    display:block;
+    width:max-content;
+    margin:35px auto 0;
+    padding:11px 22px;
+    border:1px solid #303030;
+    border-radius:7px;
+    color:#999;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.back-btn:hover{
+    color:#fff;
+    border-color:#e60000;
+}
+
+/* MOBILE */
+
+@media(max-width:650px){
+
+    .header{
+        padding:40px 18px 28px;
+    }
+
+    .header h1{
+        font-size:31px;
+    }
+
+    .header p{
+        font-size:13px;
+    }
+
+    .download-tabs{
+        width:100%;
+    }
+
+    .download-tab{
+        flex:1;
+        padding:10px 8px;
+        font-size:10px;
+    }
+
+    .download-card{
+        flex-direction:column;
+        align-items:flex-start;
+        padding:20px;
+    }
+
+    .download-icon{
+        width:54px;
+        height:54px;
+        min-width:54px;
+    }
+
+    .download-info h2{
+        font-size:18px;
+    }
+
+    .download-btn{
+        width:100%;
+        margin-top:5px;
+    }
+
+    .featured-badge{
+        right:12px;
+        top:12px;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <header class="header">
 
-    <span class="eyebrow">
-        PRIME LEADER DOWNLOADS
-    </span>
+    <div class="brand">
+        PRIME LEADER OFFICIAL
+    </div>
 
     <h1>
-        DOWNLOAD <strong>TOOLS.</strong>
+        DOWNLOAD <span>TOOLS.</span>
     </h1>
 
     <p>
@@ -249,75 +402,51 @@
 
 <main class="container">
 
-
-    <!-- DOWNLOAD TABS -->
+    <!-- TABS -->
 
     <div class="download-tabs">
 
-        <button
-            class="download-tab active"
-            onclick="showDownloadTab('emulators', this)"
-        >
+        <button class="download-tab active"
+            onclick="showDownloadTab('emulators',this)">
             EMULATORS
         </button>
 
-        <button
-            class="download-tab"
-            onclick="showDownloadTab('msi', this)"
-        >
+        <button class="download-tab"
+            onclick="showDownloadTab('msi',this)">
             MSI
         </button>
 
-        <button
-            class="download-tab"
-            onclick="showDownloadTab('software', this)"
-        >
+        <button class="download-tab"
+            onclick="showDownloadTab('software',this)">
             SOFTWARE
         </button>
 
-        <button
-            class="download-tab"
-            onclick="showDownloadTab('drivers', this)"
-        >
+        <button class="download-tab"
+            onclick="showDownloadTab('drivers',this)">
             DRIVERS
         </button>
 
-        <button
-            class="download-tab"
-            onclick="showDownloadTab('tools', this)"
-        >
+        <button class="download-tab"
+            onclick="showDownloadTab('tools',this)">
             TOOLS
         </button>
 
     </div>
 
 
-    <!-- ========================= -->
     <!-- EMULATORS -->
-    <!-- ========================= -->
 
-    <div
-        id="emulators"
-        class="download-tab-content active"
-    >
-
-        <!-- INFERNOX -->
+    <div id="emulators" class="download-tab-content active">
 
         <article class="download-card">
 
-            <div class="download-icon">
-                ▣
-            </div>
+            <div class="download-icon">▣</div>
 
             <div class="download-info">
 
-                <span class="download-type">
-                    EMULATOR
-                </span>
+                <span class="download-type">EMULATOR</span>
 
-                <h2>
-                    INFERNOX EMULATOR
-                </h2>
+                <h2>INFERNOX EMULATOR</h2>
 
                 <p>
                     InfernoX Emulator version 5.22.75.6322
@@ -328,37 +457,32 @@
                     Version 5.22.75.6322 • EXE
                 </small>
 
+                <div class="source">
+                    <span class="source-dot"></span>
+                    MediaFire
+                </div>
+
             </div>
 
-            <a
-                class="download-btn"
+            <a class="download-btn"
                 href="https://www.mediafire.com/file/z7jyfhz9tbob7vb/InfernoXInstaller_5.22.75.6322.exe/file"
                 target="_blank"
-                rel="noopener"
-            >
+                rel="noopener">
                 DOWNLOAD ↗
             </a>
 
         </article>
 
 
-        <!-- E4VX -->
-
         <article class="download-card">
 
-            <div class="download-icon">
-                ◈
-            </div>
+            <div class="download-icon">◈</div>
 
             <div class="download-info">
 
-                <span class="download-type">
-                    EMULATOR
-                </span>
+                <span class="download-type">EMULATOR</span>
 
-                <h2>
-                    E4VX LITE VERSION
-                </h2>
+                <h2>E4VX LITE VERSION</h2>
 
                 <p>
                     Lightweight E4VX version prepared for a clean
@@ -369,37 +493,32 @@
                     4.240.30.1002 • 7Z
                 </small>
 
+                <div class="source">
+                    <span class="source-dot"></span>
+                    MediaFire
+                </div>
+
             </div>
 
-            <a
-                class="download-btn"
+            <a class="download-btn"
                 href="https://www.mediafire.com/file/eo00y9m2dq2i210/4.240.30.1002_e4v.7z/file"
                 target="_blank"
-                rel="noopener"
-            >
+                rel="noopener">
                 DOWNLOAD ↗
             </a>
 
         </article>
 
 
-        <!-- BLUESTACKS -->
-
         <article class="download-card">
 
-            <div class="download-icon">
-                ▣
-            </div>
+            <div class="download-icon">▣</div>
 
             <div class="download-info">
 
-                <span class="download-type">
-                    EMULATOR
-                </span>
+                <span class="download-type">EMULATOR</span>
 
-                <h2>
-                    BLUESTACKS 4
-                </h2>
+                <h2>BLUESTACKS 4</h2>
 
                 <p>
                     BlueStacks 4 emulator package for Windows.
@@ -409,14 +528,17 @@
                     Version 4.240.30.1002 • EXE
                 </small>
 
+                <div class="source">
+                    <span class="source-dot"></span>
+                    MediaFire
+                </div>
+
             </div>
 
-            <a
-                class="download-btn"
+            <a class="download-btn"
                 href="https://www.mediafire.com/file/gtl106ooopxzeah/BlueStacks_4.240.30.1002.exe/file"
                 target="_blank"
-                rel="noopener"
-            >
+                rel="noopener">
                 DOWNLOAD ↗
             </a>
 
@@ -425,32 +547,19 @@
     </div>
 
 
-    <!-- ========================= -->
     <!-- MSI -->
-    <!-- ========================= -->
 
-    <div
-        id="msi"
-        class="download-tab-content"
-    >
-
-        <!-- MSI 5.9 -->
+    <div id="msi" class="download-tab-content">
 
         <article class="download-card">
 
-            <div class="download-icon">
-                M
-            </div>
+            <div class="download-icon">M</div>
 
             <div class="download-info">
 
-                <span class="download-type">
-                    MSI
-                </span>
+                <span class="download-type">MSI</span>
 
-                <h2>
-                    MSI 5.9
-                </h2>
+                <h2>MSI 5.9</h2>
 
                 <p>
                     MSI 5.9 emulator package for your gaming setup.
@@ -460,37 +569,32 @@
                     EXE • Windows
                 </small>
 
+                <div class="source">
+                    <span class="source-dot"></span>
+                    MediaFire
+                </div>
+
             </div>
 
-            <a
-                class="download-btn"
+            <a class="download-btn"
                 href="https://www.mediafire.com/file/pj1p1ff1l7qvpdi/MSI+5.9.exe/file"
                 target="_blank"
-                rel="noopener"
-            >
+                rel="noopener">
                 DOWNLOAD ↗
             </a>
 
         </article>
 
 
-        <!-- MSI 5.12 -->
-
         <article class="download-card">
 
-            <div class="download-icon">
-                M
-            </div>
+            <div class="download-icon">M</div>
 
             <div class="download-info">
 
-                <span class="download-type">
-                    MSI
-                </span>
+                <span class="download-type">MSI</span>
 
-                <h2>
-                    MSI 5.12
-                </h2>
+                <h2>MSI 5.12</h2>
 
                 <p>
                     MSI 5.12 emulator package.
@@ -500,14 +604,17 @@
                     Google Drive • Windows
                 </small>
 
+                <div class="source">
+                    <span class="source-dot"></span>
+                    Google Drive
+                </div>
+
             </div>
 
-            <a
-                class="download-btn"
+            <a class="download-btn"
                 href="https://drive.google.com/file/d/1_yPWfSO0hyqOJmPfg_Dm4sCP9KgoHUV_/view?pli=1"
                 target="_blank"
-                rel="noopener"
-            >
+                rel="noopener">
                 DOWNLOAD ↗
             </a>
 
@@ -516,20 +623,17 @@
     </div>
 
 
-    <!-- ========================= -->
     <!-- SOFTWARE -->
-    <!-- ========================= -->
 
-    <div
-        id="software"
-        class="download-tab-content"
-    >
+    <div id="software" class="download-tab-content">
 
-        <article class="download-card">
+        <article class="download-card featured">
 
-            <div class="download-icon">
-                PL
+            <div class="featured-badge">
+                FEATURED
             </div>
+
+            <div class="download-icon">PL</div>
 
             <div class="download-info">
 
@@ -537,9 +641,7 @@
                     OFFICIAL SOFTWARE
                 </span>
 
-                <h2>
-                    PRIME LEADER V1
-                </h2>
+                <h2>PRIME LEADER V1</h2>
 
                 <p>
                     Official PRIME LEADER performance optimization
@@ -550,14 +652,17 @@
                     PRIME LEADER • Google Drive
                 </small>
 
+                <div class="source">
+                    <span class="source-dot"></span>
+                    Google Drive
+                </div>
+
             </div>
 
-            <a
-                class="download-btn"
+            <a class="download-btn"
                 href="https://drive.google.com/file/d/1MeRd8eUYaRFuOmLR4dDAcZhdltIxqQ2-/view?usp=drive_link"
                 target="_blank"
-                rel="noopener"
-            >
+                rel="noopener">
                 DOWNLOAD ↗
             </a>
 
@@ -566,24 +671,15 @@
     </div>
 
 
-    <!-- ========================= -->
     <!-- DRIVERS -->
-    <!-- ========================= -->
 
-    <div
-        id="drivers"
-        class="download-tab-content"
-    >
+    <div id="drivers" class="download-tab-content">
 
         <div class="empty-download">
 
-            <div class="empty-icon">
-                ⚙
-            </div>
+            <div class="empty-icon">⚙</div>
 
-            <h2>
-                DRIVERS COMING SOON
-            </h2>
+            <h2>DRIVERS COMING SOON</h2>
 
             <p>
                 Driver downloads will be added here soon.
@@ -594,24 +690,15 @@
     </div>
 
 
-    <!-- ========================= -->
     <!-- TOOLS -->
-    <!-- ========================= -->
 
-    <div
-        id="tools"
-        class="download-tab-content"
-    >
+    <div id="tools" class="download-tab-content">
 
         <div class="empty-download">
 
-            <div class="empty-icon">
-                ◈
-            </div>
+            <div class="empty-icon">◈</div>
 
-            <h2>
-                TOOLS COMING SOON
-            </h2>
+            <h2>TOOLS COMING SOON</h2>
 
             <p>
                 More performance tools will be added here soon.
@@ -622,50 +709,34 @@
     </div>
 
 
-    <!-- BACK TO HOME -->
-
-    <a
-        class="back-btn"
-        href="index.html"
-    >
+    <a class="back-btn" href="index.html">
         ← BACK TO HOME
     </a>
-
 
 </main>
 
 
 <script>
 
-function showDownloadTab(tabId, button) {
+function showDownloadTab(tabId,button){
 
-    const contents =
-        document.querySelectorAll(
-            '.download-tab-content'
-        );
+    document
+        .querySelectorAll('.download-tab-content')
+        .forEach(function(content){
+            content.classList.remove('active');
+        });
 
-    contents.forEach(function(content) {
-        content.classList.remove('active');
-    });
-
-
-    const tabs =
-        document.querySelectorAll(
-            '.download-tab'
-        );
-
-    tabs.forEach(function(tab) {
-        tab.classList.remove('active');
-    });
-
+    document
+        .querySelectorAll('.download-tab')
+        .forEach(function(tab){
+            tab.classList.remove('active');
+        });
 
     document
         .getElementById(tabId)
         .classList.add('active');
 
-
     button.classList.add('active');
-
 }
 
 </script>
