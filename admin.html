@@ -20,7 +20,11 @@
 body{
     font-family:Arial,Helvetica,sans-serif;
     background:
-        radial-gradient(circle at 50% -10%,rgba(230,0,0,.18),transparent 35%),
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(230,0,0,.18),
+            transparent 35%
+        ),
         #050505;
     color:#fff;
     min-height:100vh;
@@ -39,18 +43,148 @@ body:before{
     opacity:.25;
 }
 
+/* ==============================
+   LOGIN
+============================== */
+
+#loginPage{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.login-box{
+    width:100%;
+    max-width:420px;
+    background:linear-gradient(145deg,#101010,#080808);
+    border:1px solid #292929;
+    border-radius:16px;
+    padding:35px;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+
+.login-brand{
+    text-align:center;
+    color:#ff2020;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:4px;
+    margin-bottom:15px;
+}
+
+.login-box h1{
+    text-align:center;
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.login-box h1 span{
+    color:#ff2020;
+}
+
+.login-subtitle{
+    text-align:center;
+    color:#666;
+    font-size:12px;
+    margin-bottom:28px;
+}
+
+.login-group{
+    margin-bottom:17px;
+}
+
+.login-group label{
+    display:block;
+    color:#aaa;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1px;
+    margin-bottom:7px;
+}
+
+.login-group input{
+    width:100%;
+    padding:14px;
+    background:#151515;
+    border:1px solid #303030;
+    border-radius:7px;
+    color:#fff;
+    outline:none;
+    font-size:13px;
+}
+
+.login-group input:focus{
+    border-color:#e60000;
+    box-shadow:0 0 0 2px rgba(230,0,0,.08);
+}
+
+.login-btn{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:7px;
+    background:#e60000;
+    color:#fff;
+    font-size:12px;
+    font-weight:900;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.login-btn:hover{
+    background:#ff2929;
+}
+
+.login-btn:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+.login-status{
+    display:none;
+    margin-top:15px;
+    padding:12px;
+    border-radius:7px;
+    font-size:12px;
+    line-height:1.5;
+}
+
+.login-status.error{
+    display:block;
+    background:#210909;
+    border:1px solid #641717;
+    color:#ff6666;
+}
+
+.login-status.success{
+    display:block;
+    background:#09200f;
+    border:1px solid #145c2c;
+    color:#55e77b;
+}
+
+/* ==============================
+   ADMIN PAGE
+============================== */
+
+#adminPage{
+    display:none;
+}
+
 .container{
     width:92%;
     max-width:1050px;
     margin:auto;
-    padding:50px 0 70px;
+    padding:40px 0 70px;
 }
 
 /* HEADER */
 
 .header{
     text-align:center;
-    margin-bottom:35px;
+    margin-bottom:25px;
 }
 
 .brand{
@@ -74,6 +208,46 @@ body:before{
     color:#777;
     margin-top:10px;
     font-size:13px;
+}
+
+/* USER BAR */
+
+.user-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    padding:12px 15px;
+    margin-bottom:25px;
+    background:#0d0d0d;
+    border:1px solid #292929;
+    border-radius:9px;
+}
+
+.user-info{
+    color:#777;
+    font-size:11px;
+    word-break:break-all;
+}
+
+.user-info strong{
+    color:#aaa;
+}
+
+.logout-btn{
+    padding:9px 13px;
+    border:1px solid #451616;
+    background:#180909;
+    color:#ff4444;
+    border-radius:6px;
+    font-size:10px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.logout-btn:hover{
+    background:#e60000;
+    color:#fff;
 }
 
 /* PANEL */
@@ -152,7 +326,6 @@ body:before{
 .add-btn,
 .cancel-btn,
 .refresh-btn{
-
     padding:13px 18px;
     border-radius:7px;
     font-size:11px;
@@ -170,7 +343,6 @@ body:before{
 
 .add-btn:hover{
     background:#ff2929;
-    transform:translateY(-1px);
 }
 
 .add-btn:disabled{
@@ -370,7 +542,6 @@ body:before{
     text-decoration:none;
     font-size:11px;
     font-weight:bold;
-    transition:.2s;
 }
 
 .back-btn:hover{
@@ -384,7 +555,7 @@ body:before{
 
     .container{
         width:94%;
-        padding-top:30px;
+        padding-top:25px;
     }
 
     .header h1{
@@ -396,6 +567,11 @@ body:before{
     }
 
     .button-row{
+        flex-direction:column;
+    }
+
+    .user-bar{
+        align-items:flex-start;
         flex-direction:column;
     }
 
@@ -413,11 +589,6 @@ body:before{
         flex-direction:column;
     }
 
-    .edit-btn,
-    .delete-btn{
-        padding:8px 10px;
-    }
-
     .list-header{
         align-items:flex-start;
     }
@@ -430,7 +601,92 @@ body:before{
 
 <body>
 
+
+<!-- ==========================================
+     LOGIN PAGE
+========================================== -->
+
+<div id="loginPage">
+
+    <div class="login-box">
+
+        <div class="login-brand">
+            PRIME LEADER OFFICIAL
+        </div>
+
+        <h1>
+            ADMIN <span>LOGIN.</span>
+        </h1>
+
+        <p class="login-subtitle">
+            Sign in to manage PRIME LEADER downloads.
+        </p>
+
+
+        <form id="loginForm">
+
+            <div class="login-group">
+
+                <label>
+                    EMAIL
+                </label>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="admin@email.com"
+                    autocomplete="email"
+                    required>
+
+            </div>
+
+
+            <div class="login-group">
+
+                <label>
+                    PASSWORD
+                </label>
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter password"
+                    autocomplete="current-password"
+                    required>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="login-btn"
+                id="loginBtn">
+
+                LOGIN TO ADMIN
+
+            </button>
+
+
+            <div
+                id="loginStatus"
+                class="login-status">
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ==========================================
+     ADMIN PAGE
+========================================== -->
+
+<div id="adminPage">
+
 <div class="container">
+
 
     <!-- HEADER -->
 
@@ -451,19 +707,54 @@ body:before{
     </header>
 
 
+    <!-- USER BAR -->
+
+    <div class="user-bar">
+
+        <div class="user-info">
+
+            Logged in as:
+            <strong id="loggedInEmail">
+                -
+            </strong>
+
+        </div>
+
+        <button
+            type="button"
+            class="logout-btn"
+            id="logoutBtn">
+
+            LOGOUT
+
+        </button>
+
+    </div>
+
+
     <!-- ADD / EDIT -->
 
     <section class="panel">
 
         <div class="panel-title">
-            <span id="formTitle">ADD</span> DOWNLOAD
+
+            <span id="formTitle">
+                ADD
+            </span>
+
+            DOWNLOAD
+
         </div>
+
 
         <form id="downloadForm">
 
+
             <div class="form-group">
 
-                <label>DOWNLOAD NAME</label>
+                <label>
+                    DOWNLOAD NAME
+                </label>
 
                 <input
                     type="text"
@@ -476,9 +767,13 @@ body:before{
 
             <div class="form-group">
 
-                <label>CATEGORY</label>
+                <label>
+                    CATEGORY
+                </label>
 
-                <select id="category" required>
+                <select
+                    id="category"
+                    required>
 
                     <option value="">
                         Select category
@@ -511,7 +806,9 @@ body:before{
 
             <div class="form-group">
 
-                <label>DESCRIPTION</label>
+                <label>
+                    DESCRIPTION
+                </label>
 
                 <textarea
                     id="description"
@@ -523,7 +820,9 @@ body:before{
 
             <div class="form-group">
 
-                <label>DOWNLOAD URL</label>
+                <label>
+                    DOWNLOAD URL
+                </label>
 
                 <input
                     type="url"
@@ -544,6 +843,7 @@ body:before{
                     + ADD DOWNLOAD
 
                 </button>
+
 
                 <button
                     type="button"
@@ -574,8 +874,12 @@ body:before{
         <div class="list-header">
 
             <div class="panel-title">
-                CURRENT <span>DOWNLOADS</span>
+
+                CURRENT
+                <span>DOWNLOADS</span>
+
             </div>
+
 
             <button
                 type="button"
@@ -610,13 +914,16 @@ body:before{
 
     </a>
 
+
+</div>
+
 </div>
 
 
 <script>
 
 /* ==========================================
-   SUPABASE
+   SUPABASE CONFIG
 ========================================== */
 
 const SUPABASE_URL =
@@ -634,7 +941,52 @@ const supabaseClient =
 
 
 /* ==========================================
-   ELEMENTS
+   ADMIN EMAIL
+========================================== */
+
+/*
+   Only this email is allowed to use
+   the admin panel.
+*/
+
+const ADMIN_EMAIL =
+    "geenathhasinidu100@gmail.com";
+
+
+/* ==========================================
+   LOGIN ELEMENTS
+========================================== */
+
+const loginPage =
+    document.getElementById("loginPage");
+
+const adminPage =
+    document.getElementById("adminPage");
+
+const loginForm =
+    document.getElementById("loginForm");
+
+const loginEmail =
+    document.getElementById("loginEmail");
+
+const loginPassword =
+    document.getElementById("loginPassword");
+
+const loginBtn =
+    document.getElementById("loginBtn");
+
+const loginStatus =
+    document.getElementById("loginStatus");
+
+const loggedInEmail =
+    document.getElementById("loggedInEmail");
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+
+/* ==========================================
+   ADMIN ELEMENTS
 ========================================== */
 
 const form =
@@ -675,22 +1027,34 @@ let editingId = null;
 
 
 /* ==========================================
-   STATUS
+   LOGIN STATUS
+========================================== */
+
+function showLoginStatus(message,type){
+
+    loginStatus.textContent =
+        message;
+
+    loginStatus.className =
+        "login-status " + type;
+
+}
+
+
+/* ==========================================
+   ADMIN STATUS
 ========================================== */
 
 function showStatus(message,type){
 
-    statusBox.textContent = message;
+    statusBox.textContent =
+        message;
 
     statusBox.className =
         "status " + type;
 
 }
 
-
-/* ==========================================
-   CLEAR STATUS
-========================================== */
 
 function clearStatus(){
 
@@ -699,6 +1063,346 @@ function clearStatus(){
     statusBox.className = "status";
 
 }
+
+
+/* ==========================================
+   SHOW ADMIN
+========================================== */
+
+function showAdmin(user){
+
+    loginPage.style.display =
+        "none";
+
+    adminPage.style.display =
+        "block";
+
+    loggedInEmail.textContent =
+        user.email || "-";
+
+    loadDownloads();
+
+}
+
+
+/* ==========================================
+   SHOW LOGIN
+========================================== */
+
+function showLogin(){
+
+    adminPage.style.display =
+        "none";
+
+    loginPage.style.display =
+        "flex";
+
+    loginPassword.value = "";
+
+}
+
+
+/* ==========================================
+   CHECK CURRENT SESSION
+========================================== */
+
+async function checkSession(){
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .auth
+        .getSession();
+
+
+    if(error){
+
+        console.error(
+            "Session Error:",
+            error
+        );
+
+        showLogin();
+
+        return;
+
+    }
+
+
+    const session =
+        data.session;
+
+
+    if(!session){
+
+        showLogin();
+
+        return;
+
+    }
+
+
+    const user =
+        session.user;
+
+
+    /* ADMIN EMAIL CHECK */
+
+    if(
+        user.email &&
+        user.email.toLowerCase() ===
+        ADMIN_EMAIL.toLowerCase()
+    ){
+
+        showAdmin(user);
+
+    }else{
+
+        await supabaseClient.auth.signOut();
+
+        showLoginStatus(
+            "Access denied. This account is not an administrator.",
+            "error"
+        );
+
+        showLogin();
+
+    }
+
+}
+
+
+/* ==========================================
+   LOGIN
+========================================== */
+
+loginForm.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+
+        const email =
+            loginEmail.value
+            .trim()
+            .toLowerCase();
+
+
+        const password =
+            loginPassword.value;
+
+
+        loginBtn.disabled =
+            true;
+
+        loginBtn.textContent =
+            "LOGGING IN...";
+
+
+        loginStatus.className =
+            "login-status";
+
+
+        try{
+
+            const {
+                data,
+                error
+            } = await supabaseClient
+                .auth
+                .signInWithPassword({
+                    email:email,
+                    password:password
+                });
+
+
+            if(error){
+
+                console.error(
+                    "Login Error:",
+                    error
+                );
+
+                showLoginStatus(
+                    error.message,
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if(!data.user){
+
+                showLoginStatus(
+                    "Login failed.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* ADMIN EMAIL CHECK */
+
+            if(
+                !data.user.email ||
+                data.user.email.toLowerCase() !==
+                ADMIN_EMAIL.toLowerCase()
+            ){
+
+                await supabaseClient
+                    .auth
+                    .signOut();
+
+
+                showLoginStatus(
+                    "Access denied. This account is not an administrator.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            showLoginStatus(
+                "Login successful!",
+                "success"
+            );
+
+
+            setTimeout(
+                function(){
+
+                    showAdmin(
+                        data.user
+                    );
+
+                },
+                300
+            );
+
+
+        }
+        catch(error){
+
+            console.error(
+                "Unexpected Login Error:",
+                error
+            );
+
+            showLoginStatus(
+                "Unable to login. Please try again.",
+                "error"
+            );
+
+        }
+        finally{
+
+            loginBtn.disabled =
+                false;
+
+            loginBtn.textContent =
+                "LOGIN TO ADMIN";
+
+        }
+
+    }
+);
+
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+logoutBtn.addEventListener(
+    "click",
+    async function(){
+
+        const confirmed =
+            confirm(
+                "Logout from Admin Panel?"
+            );
+
+
+        if(!confirmed){
+            return;
+        }
+
+
+        await supabaseClient
+            .auth
+            .signOut();
+
+
+        showLogin();
+
+        showLoginStatus(
+            "You have been logged out.",
+            "success"
+        );
+
+    }
+);
+
+
+/* ==========================================
+   AUTH STATE
+========================================== */
+
+supabaseClient
+    .auth
+    .onAuthStateChange(
+        async function(event,session){
+
+            if(
+                event === "SIGNED_OUT"
+            ){
+
+                showLogin();
+
+                return;
+
+            }
+
+
+            if(
+                session &&
+                session.user
+            ){
+
+                const email =
+                    session.user.email || "";
+
+
+                if(
+                    email.toLowerCase() ===
+                    ADMIN_EMAIL.toLowerCase()
+                ){
+
+                    showAdmin(
+                        session.user
+                    );
+
+                }else{
+
+                    await supabaseClient
+                        .auth
+                        .signOut();
+
+                    showLogin();
+
+                }
+
+            }
+
+        }
+    );
 
 
 /* ==========================================
@@ -711,7 +1415,8 @@ function resetForm(){
 
     form.reset();
 
-    formTitle.textContent = "ADD";
+    formTitle.textContent =
+        "ADD";
 
     addBtn.textContent =
         "+ ADD DOWNLOAD";
@@ -725,7 +1430,7 @@ function resetForm(){
 
 
 /* ==========================================
-   ADD / UPDATE
+   ADD / UPDATE DOWNLOAD
 ========================================== */
 
 form.addEventListener(
@@ -733,6 +1438,7 @@ form.addEventListener(
     async function(event){
 
         event.preventDefault();
+
 
         const name =
             nameInput.value.trim();
@@ -747,10 +1453,12 @@ form.addEventListener(
             urlInput.value.trim();
 
 
-        if(!name ||
-           !category ||
-           !description ||
-           !download_url){
+        if(
+            !name ||
+            !category ||
+            !description ||
+            !download_url
+        ){
 
             showStatus(
                 "Please fill all fields.",
@@ -758,10 +1466,13 @@ form.addEventListener(
             );
 
             return;
+
         }
 
 
-        addBtn.disabled = true;
+        addBtn.disabled =
+            true;
+
 
         addBtn.textContent =
             editingId
@@ -773,8 +1484,6 @@ form.addEventListener(
 
             if(editingId){
 
-                /* UPDATE */
-
                 const {
                     error
                 } = await supabaseClient
@@ -785,7 +1494,10 @@ form.addEventListener(
                         description:description,
                         download_url:download_url
                     })
-                    .eq("id",editingId);
+                    .eq(
+                        "id",
+                        editingId
+                    );
 
 
                 if(error){
@@ -802,17 +1514,19 @@ form.addEventListener(
                     );
 
                     return;
+
                 }
 
+
+                resetForm();
 
                 showStatus(
                     "Download updated successfully!",
                     "success"
                 );
 
-            }else{
 
-                /* INSERT */
+            }else{
 
                 const {
                     error
@@ -842,8 +1556,11 @@ form.addEventListener(
                     );
 
                     return;
+
                 }
 
+
+                resetForm();
 
                 showStatus(
                     "Download added successfully!",
@@ -853,19 +1570,8 @@ form.addEventListener(
             }
 
 
-            resetForm();
-
             await loadDownloads();
 
-
-            /* Show success again after reset */
-
-            showStatus(
-                editingId
-                    ? "Download updated successfully!"
-                    : "Download added successfully!",
-                "success"
-            );
 
         }
         catch(error){
@@ -883,7 +1589,9 @@ form.addEventListener(
         }
         finally{
 
-            addBtn.disabled = false;
+            addBtn.disabled =
+                false;
+
 
             if(!editingId){
 
@@ -932,18 +1640,23 @@ async function loadDownloads(){
             error
         );
 
+
         downloadList.innerHTML = `
             <div class="empty" style="color:#ff4444;">
                 Failed to load downloads.<br><br>
-                ${error.message}
+                ${escapeHTML(error.message)}
             </div>
         `;
 
         return;
+
     }
 
 
-    if(!data || data.length === 0){
+    if(
+        !data ||
+        data.length === 0
+    ){
 
         downloadList.innerHTML = `
             <div class="empty">
@@ -952,6 +1665,7 @@ async function loadDownloads(){
         `;
 
         return;
+
     }
 
 
@@ -962,7 +1676,10 @@ async function loadDownloads(){
         function(download){
 
             const item =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
+
 
             item.className =
                 "download-item";
@@ -981,21 +1698,31 @@ async function loadDownloads(){
                     ↓
                 </div>
 
+
                 <div class="download-info">
 
                     <div class="category">
                         ${escapeHTML(category)}
                     </div>
 
+
                     <h3>
-                        ${escapeHTML(download.name || "Untitled")}
+                        ${escapeHTML(
+                            download.name ||
+                            "Untitled"
+                        )}
                     </h3>
 
+
                     <small>
-                        ${escapeHTML(download.description || "")}
+                        ${escapeHTML(
+                            download.description ||
+                            ""
+                        )}
                     </small>
 
                 </div>
+
 
                 <div class="actions">
 
@@ -1006,6 +1733,7 @@ async function loadDownloads(){
                         EDIT
 
                     </button>
+
 
                     <button
                         class="delete-btn"
@@ -1020,24 +1748,26 @@ async function loadDownloads(){
             `;
 
 
-            /* EDIT */
-
             item
-                .querySelector(".edit-btn")
+                .querySelector(
+                    ".edit-btn"
+                )
                 .addEventListener(
                     "click",
                     function(){
 
-                        editDownload(download);
+                        editDownload(
+                            download
+                        );
 
                     }
                 );
 
 
-            /* DELETE */
-
             item
-                .querySelector(".delete-btn")
+                .querySelector(
+                    ".delete-btn"
+                )
                 .addEventListener(
                     "click",
                     function(){
@@ -1050,7 +1780,9 @@ async function loadDownloads(){
                 );
 
 
-            downloadList.appendChild(item);
+            downloadList.appendChild(
+                item
+            );
 
         }
     );
@@ -1145,7 +1877,10 @@ async function deleteDownload(id){
         } = await supabaseClient
             .from("downloads")
             .delete()
-            .eq("id",id);
+            .eq(
+                "id",
+                id
+            );
 
 
         if(error){
@@ -1155,6 +1890,7 @@ async function deleteDownload(id){
                 error
             );
 
+
             showStatus(
                 "Failed to delete: " +
                 error.message,
@@ -1162,6 +1898,7 @@ async function deleteDownload(id){
             );
 
             return;
+
         }
 
 
@@ -1181,6 +1918,7 @@ async function deleteDownload(id){
             error
         );
 
+
         showStatus(
             "Something went wrong.",
             "error"
@@ -1199,7 +1937,8 @@ refreshBtn.addEventListener(
     "click",
     async function(){
 
-        refreshBtn.disabled = true;
+        refreshBtn.disabled =
+            true;
 
         refreshBtn.textContent =
             "↻ LOADING...";
@@ -1208,7 +1947,8 @@ refreshBtn.addEventListener(
         await loadDownloads();
 
 
-        refreshBtn.disabled = false;
+        refreshBtn.disabled =
+            false;
 
         refreshBtn.textContent =
             "↻ REFRESH";
@@ -1224,11 +1964,26 @@ refreshBtn.addEventListener(
 function escapeHTML(value){
 
     return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
@@ -1237,7 +1992,7 @@ function escapeHTML(value){
    START
 ========================================== */
 
-loadDownloads();
+checkSession();
 
 </script>
 
