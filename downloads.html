@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Downloads | PRIME LEADER Official</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -34,6 +38,8 @@ body:before{
     background-size:100% 4px;
     opacity:.25;
 }
+
+/* HEADER */
 
 .header{
     text-align:center;
@@ -65,6 +71,8 @@ body:before{
     color:#8e8e8e;
     line-height:1.6;
 }
+
+/* CONTAINER */
 
 .container{
     width:92%;
@@ -124,6 +132,7 @@ body:before{
 }
 
 @keyframes fadeIn{
+
     from{
         opacity:0;
         transform:translateY(6px);
@@ -133,6 +142,7 @@ body:before{
         opacity:1;
         transform:translateY(0);
     }
+
 }
 
 /* CARD */
@@ -236,6 +246,26 @@ body:before{
     background:#e60000;
 }
 
+/* FEATURED */
+
+.featured{
+    border-color:#6d1616;
+    box-shadow:0 0 30px rgba(230,0,0,.08);
+}
+
+.featured-badge{
+    position:absolute;
+    right:18px;
+    top:15px;
+    padding:5px 9px;
+    border-radius:5px;
+    background:#e60000;
+    color:#fff;
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
 /* BUTTON */
 
 .download-btn{
@@ -285,31 +315,27 @@ body:before{
     color:#777;
 }
 
-/* ERROR */
-
-.error-download{
-    text-align:center;
-    padding:50px 20px;
-    background:#0d0d0d;
-    border:1px solid #4a1111;
-    border-radius:14px;
-}
-
-.error-download h2{
-    color:#ff2929;
-    margin-bottom:10px;
-}
-
-.error-download p{
-    color:#777;
-}
-
 /* LOADING */
 
-.loading-download{
+.loading{
     text-align:center;
     padding:50px 20px;
     color:#777;
+}
+
+.loading span{
+    color:#e60000;
+}
+
+/* ERROR */
+
+.error-box{
+    text-align:center;
+    padding:40px 20px;
+    background:#120707;
+    border:1px solid #4a1717;
+    border-radius:14px;
+    color:#ff5555;
 }
 
 /* BACK */
@@ -379,11 +405,15 @@ body:before{
         width:100%;
         margin-top:5px;
     }
-}
-</style>
 
-<!-- SUPABASE -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    .featured-badge{
+        right:12px;
+        top:12px;
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -408,6 +438,7 @@ body:before{
 
 
 <main class="container">
+
 
     <!-- TABS -->
 
@@ -446,58 +477,66 @@ body:before{
     </div>
 
 
-    <!-- SUPABASE DOWNLOAD CONTAINERS -->
+    <!-- EMULATORS -->
 
     <div
         id="emulators"
         class="download-tab-content active">
 
-        <div class="loading-download">
-            Loading downloads...
+        <div class="loading">
+            Loading <span>downloads...</span>
         </div>
 
     </div>
 
+
+    <!-- MSI -->
 
     <div
         id="msi"
         class="download-tab-content">
 
-        <div class="loading-download">
-            Loading downloads...
+        <div class="loading">
+            Loading <span>downloads...</span>
         </div>
 
     </div>
 
+
+    <!-- SOFTWARE -->
 
     <div
         id="software"
         class="download-tab-content">
 
-        <div class="loading-download">
-            Loading downloads...
+        <div class="loading">
+            Loading <span>downloads...</span>
         </div>
 
     </div>
 
+
+    <!-- DRIVERS -->
 
     <div
         id="drivers"
         class="download-tab-content">
 
-        <div class="loading-download">
-            Loading downloads...
+        <div class="loading">
+            Loading <span>downloads...</span>
         </div>
 
     </div>
 
 
+    <!-- TOOLS -->
+
     <div
         id="tools"
         class="download-tab-content">
 
-        <div class="loading-download">
-            Loading downloads...
+        <div class="loading">
+            Loading <span>downloads...</span>
         </div>
 
     </div>
@@ -508,6 +547,7 @@ body:before{
         href="index.html">
         ← BACK TO HOME
     </a>
+
 
 </main>
 
@@ -522,7 +562,7 @@ const SUPABASE_URL =
     "https://qelvvvldriqtialnpelk.supabase.co";
 
 const SUPABASE_KEY =
-    "YOUR_PUBLISHABLE_KEY";
+    "sb_publishable_1-FLjKgb3U8xZyA_sWQ0Ow_LzNYl8ed";
 
 
 const supabaseClient =
@@ -536,7 +576,7 @@ const supabaseClient =
    TAB SYSTEM
 ========================================= */
 
-function showDownloadTab(tabId,button){
+function showDownloadTab(tabId, button){
 
     document
         .querySelectorAll('.download-tab-content')
@@ -567,272 +607,432 @@ function showDownloadTab(tabId,button){
     }
 
 
-    button.classList.add('active');
+    if(button){
+
+        button.classList.add('active');
+
+    }
 
 }
 
 
 /* =========================================
-   CLEAR LOADING MESSAGES
+   ICON
 ========================================= */
 
-function clearLoading(){
+function getCategoryIcon(category){
 
-    document
-        .querySelectorAll('.download-tab-content')
-        .forEach(function(section){
+    switch(category){
 
-            section.innerHTML = "";
+        case "emulators":
+            return "▣";
 
-        });
+        case "msi":
+            return "M";
+
+        case "software":
+            return "PL";
+
+        case "drivers":
+            return "⚙";
+
+        case "tools":
+            return "◈";
+
+        default:
+            return "↓";
+
+    }
 
 }
 
 
 /* =========================================
-   LOAD DOWNLOADS FROM SUPABASE
+   LOAD DOWNLOADS
 ========================================= */
 
 async function loadDownloads(){
 
-    const {
-        data,
-        error
-    } = await supabaseClient
-        .from('downloads')
-        .select('*')
-        .order(
-            'created_at',
-            {
-                ascending:false
-            }
-        );
+    const sections = {
+
+        emulators:
+            document.getElementById("emulators"),
+
+        msi:
+            document.getElementById("msi"),
+
+        software:
+            document.getElementById("software"),
+
+        drivers:
+            document.getElementById("drivers"),
+
+        tools:
+            document.getElementById("tools")
+
+    };
 
 
-    /* ERROR */
+    try{
 
-    if(error){
+        const { data, error } =
+            await supabaseClient
 
-        console.error(
-            "Supabase Error:",
-            error
-        );
+                .from("downloads")
 
+                .select("*")
 
-        document
-            .querySelectorAll('.download-tab-content')
-            .forEach(function(section){
-
-                section.innerHTML = `
-                    <div class="error-download">
-
-                        <h2>
-                            DOWNLOADS UNAVAILABLE
-                        </h2>
-
-                        <p>
-                            Unable to load downloads right now.
-                        </p>
-
-                    </div>
-                `;
-
-            });
-
-        return;
-    }
+                .order(
+                    "created_at",
+                    {
+                        ascending:false
+                    }
+                );
 
 
-    console.log(
-        "Downloads loaded:",
-        data
-    );
+        if(error){
 
-
-    /* CLEAR OLD CONTENT */
-
-    clearLoading();
-
-
-    /* NO DOWNLOADS */
-
-    if(!data || data.length === 0){
-
-        document
-            .querySelectorAll('.download-tab-content')
-            .forEach(function(section){
-
-                section.innerHTML = `
-                    <div class="empty-download">
-
-                        <div class="empty-icon">
-                            ◈
-                        </div>
-
-                        <h2>
-                            NO DOWNLOADS AVAILABLE
-                        </h2>
-
-                        <p>
-                            New downloads will be added soon.
-                        </p>
-
-                    </div>
-                `;
-
-            });
-
-        return;
-    }
-
-
-    /* ADD DATABASE DOWNLOADS */
-
-    data.forEach(function(download){
-
-        const category =
-            String(
-                download.category || "tools"
-            )
-            .trim()
-            .toLowerCase();
-
-
-        const section =
-            document.getElementById(category);
-
-
-        /*
-            If category doesn't match one
-            of the existing tabs, skip it.
-        */
-
-        if(!section){
-
-            console.warn(
-                "Unknown download category:",
-                category
+            console.error(
+                "Supabase Error:",
+                error
             );
 
+            Object.values(sections)
+                .forEach(function(section){
+
+                    section.innerHTML = `
+                        <div class="error-box">
+                            Failed to load downloads.
+                        </div>
+                    `;
+
+                });
+
             return;
+
         }
 
 
-        const card =
-            document.createElement("article");
+        console.log(
+            "Downloads loaded:",
+            data
+        );
 
 
-        card.className =
-            "download-card";
+        /*
+         * Remove loading messages
+         */
+
+        Object.values(sections)
+            .forEach(function(section){
+
+                section.innerHTML = "";
+
+            });
 
 
-        /* SAFE VALUES */
+        /*
+         * No downloads
+         */
 
-        const name =
-            download.name || "Download";
+        if(!data || data.length === 0){
 
+            Object.values(sections)
+                .forEach(function(section){
 
-        const description =
-            download.description || "";
+                    section.innerHTML = `
+                        <div class="empty-download">
 
+                            <div class="empty-icon">
+                                ↓
+                            </div>
 
-        const downloadUrl =
-            download.download_url || "#";
+                            <h2>
+                                NO DOWNLOADS
+                            </h2>
 
+                            <p>
+                                Downloads will be added soon.
+                            </p>
 
-        const type =
-            category.toUpperCase();
-
-
-        /* CARD HTML */
-
-        card.innerHTML = `
-
-            <div class="download-icon">
-                ↓
-            </div>
-
-
-            <div class="download-info">
-
-                <span class="download-type">
-                    ${type}
-                </span>
-
-
-                <h2>
-                    ${name}
-                </h2>
-
-
-                <p>
-                    ${description}
-                </p>
-
-
-                <small>
-                    PRIME LEADER • Official Download
-                </small>
-
-
-                <div class="source">
-
-                    <span class="source-dot"></span>
-
-                    Official Download
-
-                </div>
-
-            </div>
-
-
-            <a
-                class="download-btn"
-                href="${downloadUrl}"
-                target="_blank"
-                rel="noopener noreferrer">
-
-                DOWNLOAD ↗
-
-            </a>
-
-        `;
-
-
-        section.appendChild(card);
-
-    });
-
-
-    /* SHOW EMPTY MESSAGE FOR EMPTY CATEGORIES */
-
-    document
-        .querySelectorAll('.download-tab-content')
-        .forEach(function(section){
-
-            if(section.children.length === 0){
-
-                section.innerHTML = `
-                    <div class="empty-download">
-
-                        <div class="empty-icon">
-                            ◈
                         </div>
+                    `;
 
-                        <h2>
-                            NO DOWNLOADS AVAILABLE
-                        </h2>
+                });
 
-                        <p>
-                            New downloads will be added soon.
-                        </p>
+            return;
 
-                    </div>
-                `;
+        }
+
+
+        /*
+         * Prevent duplicate cards
+         */
+
+        const usedIds = new Set();
+
+
+        data.forEach(function(download){
+
+            /*
+             * Skip duplicate database rows
+             */
+
+            const uniqueId =
+                download.id ||
+                download.download_url;
+
+
+            if(usedIds.has(uniqueId)){
+
+                return;
 
             }
 
+
+            usedIds.add(uniqueId);
+
+
+            /*
+             * Category
+             */
+
+            const category =
+                String(
+                    download.category ||
+                    "tools"
+                )
+                .trim()
+                .toLowerCase();
+
+
+            /*
+             * Find category section
+             */
+
+            const section =
+                sections[category];
+
+
+            if(!section){
+
+                console.warn(
+                    "Unknown category:",
+                    category,
+                    download
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * Create card
+             */
+
+            const card =
+                document.createElement("article");
+
+
+            card.className =
+                "download-card";
+
+
+            /*
+             * Featured support
+             */
+
+            if(download.featured){
+
+                card.classList.add(
+                    "featured"
+                );
+
+            }
+
+
+            /*
+             * Card content
+             */
+
+            card.innerHTML = `
+
+                ${
+                    download.featured
+                    ? `
+                        <div class="featured-badge">
+                            FEATURED
+                        </div>
+                    `
+                    : ""
+                }
+
+
+                <div class="download-icon">
+
+                    ${getCategoryIcon(category)}
+
+                </div>
+
+
+                <div class="download-info">
+
+                    <span class="download-type">
+
+                        ${
+                            category
+                                .toUpperCase()
+                        }
+
+                    </span>
+
+
+                    <h2>
+
+                        ${
+                            escapeHTML(
+                                download.name ||
+                                "DOWNLOAD"
+                            )
+                        }
+
+                    </h2>
+
+
+                    <p>
+
+                        ${
+                            escapeHTML(
+                                download.description ||
+                                ""
+                            )
+                        }
+
+                    </p>
+
+
+                    <small>
+
+                        PRIME LEADER
+                        • Official Download
+
+                    </small>
+
+
+                    <div class="source">
+
+                        <span class="source-dot"></span>
+
+                        Official Download
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    class="download-btn"
+                    href="${
+                        escapeAttribute(
+                            download.download_url ||
+                            "#"
+                        )
+                    }"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    DOWNLOAD ↗
+
+                </a>
+
+            `;
+
+
+            section.appendChild(card);
+
         });
+
+
+        /*
+         * Empty categories
+         */
+
+        Object.entries(sections)
+            .forEach(function([category,section]){
+
+                if(section.children.length === 0){
+
+                    section.innerHTML = `
+
+                        <div class="empty-download">
+
+                            <div class="empty-icon">
+
+                                ◈
+
+                            </div>
+
+                            <h2>
+
+                                ${
+                                    category
+                                        .toUpperCase()
+                                }
+                                COMING SOON
+
+                            </h2>
+
+                            <p>
+
+                                More downloads will be
+                                added here soon.
+
+                            </p>
+
+                        </div>
+
+                    `;
+
+                }
+
+            });
+
+
+    }
+    catch(error){
+
+        console.error(
+            "Download loading error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   SECURITY HELPERS
+========================================= */
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeAttribute(value){
+
+    return String(value)
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
 
@@ -844,6 +1044,7 @@ async function loadDownloads(){
 loadDownloads();
 
 </script>
+
 
 </body>
 </html>
