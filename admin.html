@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Admin | PRIME LEADER Official</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(230,0,0,.16),
+            transparent 35%
+        ),
+        #050505;
+    color:#fff;
+    min-height:100vh;
+}
+
+.container{
+    width:92%;
+    max-width:1000px;
+    margin:auto;
+    padding:50px 0 70px;
+}
+
+.header{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.brand{
+    color:#ff2020;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:4px;
+    margin-bottom:12px;
+}
+
+.header h1{
+    font-size:38px;
+}
+
+.header h1 span{
+    color:#ff2020;
+}
+
+.header p{
+    color:#777;
+    margin-top:10px;
+}
+
+/* PANEL */
+
+.panel{
+    background:#0c0c0c;
+    border:1px solid #292929;
+    border-radius:14px;
+    padding:28px;
+    margin-bottom:25px;
+}
+
+.panel-title{
+    font-size:18px;
+    margin-bottom:22px;
+}
+
+.panel-title span{
+    color:#ff2020;
+}
+
+/* FORM */
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    color:#aaa;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:.7px;
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+
+    width:100%;
+
+    padding:13px 14px;
+
+    background:#151515;
+
+    border:1px solid #303030;
+
+    border-radius:7px;
+
+    color:#fff;
+
+    outline:none;
+
+    font-size:13px;
+
+    transition:.2s;
+}
+
+.form-group textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+    border-color:#e60000;
+    box-shadow:0 0 0 2px rgba(230,0,0,.08);
+}
+
+.form-group select option{
+    background:#111;
+}
+
+/* BUTTON */
+
+.add-btn{
+
+    width:100%;
+
+    padding:14px;
+
+    border:0;
+
+    border-radius:7px;
+
+    background:#e60000;
+
+    color:#fff;
+
+    font-size:13px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.add-btn:hover{
+    background:#ff2929;
+    transform:translateY(-1px);
+}
+
+.add-btn:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+/* STATUS */
+
+.status{
+    margin-top:15px;
+    padding:12px;
+    border-radius:7px;
+    display:none;
+    font-size:12px;
+}
+
+.status.success{
+    display:block;
+    background:#09200f;
+    border:1px solid #145c2c;
+    color:#55e77b;
+}
+
+.status.error{
+    display:block;
+    background:#210909;
+    border:1px solid #641717;
+    color:#ff6666;
+}
+
+/* DOWNLOAD LIST */
+
+.download-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.download-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:17px;
+
+    background:#121212;
+
+    border:1px solid #292929;
+
+    border-radius:10px;
+}
+
+.download-icon{
+
+    width:48px;
+
+    height:48px;
+
+    min-width:48px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#181818;
+
+    border:1px solid #333;
+
+    border-radius:9px;
+
+    color:#ff2020;
+
+    font-weight:900;
+}
+
+.download-info{
+    flex:1;
+}
+
+.download-info h3{
+    font-size:15px;
+    margin-bottom:5px;
+}
+
+.download-info small{
+    color:#666;
+    font-size:10px;
+}
+
+.category{
+    display:inline-block;
+
+    color:#ff2929;
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    margin-bottom:5px;
+}
+
+/* DELETE */
+
+.delete-btn{
+
+    padding:9px 13px;
+
+    border:1px solid #451616;
+
+    background:#180909;
+
+    color:#ff4444;
+
+    border-radius:6px;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.delete-btn:hover{
+
+    background:#e60000;
+
+    color:#fff;
+
+    border-color:#e60000;
+}
+
+/* BACK */
+
+.back-btn{
+
+    display:block;
+
+    width:max-content;
+
+    margin:25px auto 0;
+
+    padding:10px 20px;
+
+    border:1px solid #303030;
+
+    border-radius:7px;
+
+    color:#888;
+
+    text-decoration:none;
+
+    font-size:11px;
+
+    font-weight:bold;
+}
+
+.back-btn:hover{
+
+    color:#fff;
+
+    border-color:#e60000;
+}
+
+/* MOBILE */
+
+@media(max-width:650px){
+
+    .container{
+        padding-top:30px;
+    }
+
+    .header h1{
+        font-size:30px;
+    }
+
+    .panel{
+        padding:20px;
+    }
+
+    .download-item{
+        align-items:flex-start;
+    }
+
+    .delete-btn{
+        margin-left:auto;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="brand">
+            PRIME LEADER OFFICIAL
+        </div>
+
+        <h1>
+            ADMIN <span>PANEL.</span>
+        </h1>
+
+        <p>
+            Manage downloads from your Supabase database.
+        </p>
+
+    </header>
+
+
+    <!-- ADD DOWNLOAD -->
+
+    <section class="panel">
+
+        <div class="panel-title">
+            ADD <span>DOWNLOAD</span>
+        </div>
+
+
+        <form id="downloadForm">
+
+
+            <!-- NAME -->
+
+            <div class="form-group">
+
+                <label>
+                    DOWNLOAD NAME
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Example: InfernoX Emulator"
+                    required>
+
+            </div>
+
+
+            <!-- CATEGORY -->
+
+            <div class="form-group">
+
+                <label>
+                    CATEGORY
+                </label>
+
+                <select
+                    id="category"
+                    required>
+
+                    <option value="">
+                        Select category
+                    </option>
+
+                    <option value="emulators">
+                        Emulators
+                    </option>
+
+                    <option value="msi">
+                        MSI
+                    </option>
+
+                    <option value="software">
+                        Software
+                    </option>
+
+                    <option value="drivers">
+                        Drivers
+                    </option>
+
+                    <option value="tools">
+                        Tools
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="form-group">
+
+                <label>
+                    DESCRIPTION
+                </label>
+
+                <textarea
+                    id="description"
+                    placeholder="Write a short description..."
+                    required></textarea>
+
+            </div>
+
+
+            <!-- URL -->
+
+            <div class="form-group">
+
+                <label>
+                    DOWNLOAD URL
+                </label>
+
+                <input
+                    type="url"
+                    id="download_url"
+                    placeholder="https://drive.google.com/... "
+                    required>
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <button
+                type="submit"
+                class="add-btn"
+                id="addBtn">
+
+                + ADD DOWNLOAD
+
+            </button>
+
+
+            <div
+                id="status"
+                class="status">
+            </div>
+
+
+        </form>
+
+    </section>
+
+
+    <!-- CURRENT DOWNLOADS -->
+
+    <section class="panel">
+
+        <div class="panel-title">
+            CURRENT <span>DOWNLOADS</span>
+        </div>
+
+        <div
+            id="downloadList"
+            class="download-list">
+
+            <div style="color:#666;font-size:12px;">
+                Loading downloads...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <a
+        href="downloads.html"
+        class="back-btn">
+
+        ← OPEN DOWNLOADS PAGE
+
+    </a>
+
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   SUPABASE
+========================================== */
+
+const SUPABASE_URL =
+    "https://qelvvvldriqtialnpelk.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_1-FLjKgb3U8xZyA_sWQ0Ow_LzNYl8ed";
+
+
+const supabaseClient =
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* ==========================================
+   ELEMENTS
+========================================== */
+
+const form =
+    document.getElementById("downloadForm");
+
+const statusBox =
+    document.getElementById("status");
+
+const addBtn =
+    document.getElementById("addBtn");
+
+const downloadList =
+    document.getElementById("downloadList");
+
+
+/* ==========================================
+   STATUS
+========================================== */
+
+function showStatus(message,type){
+
+    statusBox.textContent =
+        message;
+
+    statusBox.className =
+        "status " + type;
+
+}
+
+
+/* ==========================================
+   ADD DOWNLOAD
+========================================== */
+
+form.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+
+        const name =
+            document.getElementById("name")
+            .value
+            .trim();
+
+
+        const category =
+            document.getElementById("category")
+            .value;
+
+
+        const description =
+            document.getElementById("description")
+            .value
+            .trim();
+
+
+        const download_url =
+            document.getElementById("download_url")
+            .value
+            .trim();
+
+
+        addBtn.disabled = true;
+
+        addBtn.textContent =
+            "ADDING...";
+
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from("downloads")
+            .insert([
+                {
+                    name: name,
+                    category: category,
+                    description: description,
+                    download_url: download_url
+                }
+            ])
+            .select();
+
+
+        if(error){
+
+            console.error(
+                "Supabase Error:",
+                error
+            );
+
+            showStatus(
+                "Failed to add download: " +
+                error.message,
+                "error"
+            );
+
+            addBtn.disabled = false;
+
+            addBtn.textContent =
+                "+ ADD DOWNLOAD";
+
+            return;
+        }
+
+
+        console.log(
+            "Download added:",
+            data
+        );
+
+
+        showStatus(
+            "Download added successfully!",
+            "success"
+        );
+
+
+        form.reset();
+
+
+        addBtn.disabled = false;
+
+        addBtn.textContent =
+            "+ ADD DOWNLOAD";
+
+
+        loadDownloads();
+
+    }
+);
+
+
+/* ==========================================
+   LOAD DOWNLOADS
+========================================== */
+
+async function loadDownloads(){
+
+    downloadList.innerHTML = `
+        <div style="color:#666;font-size:12px;">
+            Loading downloads...
+        </div>
+    `;
+
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("downloads")
+        .select("*")
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
+
+
+    if(error){
+
+        console.error(
+            "Supabase Error:",
+            error
+        );
+
+
+        downloadList.innerHTML = `
+            <div style="color:#ff4444;font-size:12px;">
+                Failed to load downloads.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    if(!data || data.length === 0){
+
+        downloadList.innerHTML = `
+            <div style="color:#666;font-size:12px;">
+                No downloads added yet.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    downloadList.innerHTML = "";
+
+
+    data.forEach(
+        function(download){
+
+            const item =
+                document.createElement("div");
+
+
+            item.className =
+                "download-item";
+
+
+            item.innerHTML = `
+
+                <div class="download-icon">
+                    ↓
+                </div>
+
+
+                <div class="download-info">
+
+                    <div class="category">
+                        ${
+                            (
+                                download.category ||
+                                "DOWNLOAD"
+                            ).toUpperCase()
+                        }
+                    </div>
+
+
+                    <h3>
+                        ${download.name}
+                    </h3>
+
+
+                    <small>
+                        ${download.description || ""}
+                    </small>
+
+                </div>
+
+
+                <button
+                    class="delete-btn"
+                    onclick="deleteDownload('${download.id}')">
+
+                    DELETE
+
+                </button>
+
+            `;
+
+
+            downloadList.appendChild(item);
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   DELETE DOWNLOAD
+========================================== */
+
+async function deleteDownload(id){
+
+    const confirmed =
+        confirm(
+            "Delete this download?"
+        );
+
+
+    if(!confirmed){
+        return;
+    }
+
+
+    const {
+        error
+    } = await supabaseClient
+        .from("downloads")
+        .delete()
+        .eq("id",id);
+
+
+    if(error){
+
+        console.error(
+            "Delete Error:",
+            error
+        );
+
+
+        alert(
+            "Failed to delete download."
+        );
+
+        return;
+    }
+
+
+    loadDownloads();
+
+}
+
+
+/* ==========================================
+   START
+========================================== */
+
+loadDownloads();
+
+</script>
+
+</body>
+</html>
