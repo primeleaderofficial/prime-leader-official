@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,6 +42,7 @@ body:before{
     background-size:100% 4px;
     opacity:.25;
 }
+
 
 /* ==========================================
    LOGIN
@@ -322,11 +322,6 @@ body:before{
     transition:.2s;
 }
 
-.form-group textarea{
-    min-height:100px;
-    resize:vertical;
-}
-
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus{
@@ -334,8 +329,45 @@ body:before{
     box-shadow:0 0 0 2px rgba(230,0,0,.08);
 }
 
+.form-group textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
 .form-group select option{
     background:#111;
+}
+
+
+/* ==========================================
+   FILE INPUT
+========================================== */
+
+.file-input{
+    cursor:pointer;
+}
+
+.file-help{
+    margin-top:7px;
+    color:#555;
+    font-size:10px;
+}
+
+.file-preview{
+    display:none;
+    margin-top:12px;
+    max-width:240px;
+    border:1px solid #333;
+    border-radius:8px;
+    overflow:hidden;
+    background:#111;
+}
+
+.file-preview img{
+    display:block;
+    width:100%;
+    max-height:260px;
+    object-fit:contain;
 }
 
 
@@ -409,6 +441,7 @@ body:before{
     border-radius:7px;
     display:none;
     font-size:12px;
+    line-height:1.5;
 }
 
 .status.success{
@@ -514,6 +547,61 @@ body:before{
 
 
 /* ==========================================
+   REVIEWS LIST
+========================================== */
+
+.review-list{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.review-item{
+    background:#121212;
+    border:1px solid #292929;
+    border-radius:10px;
+    overflow:hidden;
+    transition:.2s;
+}
+
+.review-item:hover{
+    border-color:#4a1717;
+    transform:translateY(-2px);
+}
+
+.review-image{
+    width:100%;
+    aspect-ratio:1 / 1;
+    background:#090909;
+    overflow:hidden;
+}
+
+.review-image img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+}
+
+.review-bottom{
+    padding:13px;
+}
+
+.review-name{
+    color:#fff;
+    font-size:13px;
+    font-weight:900;
+    word-break:break-word;
+    margin-bottom:10px;
+}
+
+.review-actions{
+    display:flex;
+    justify-content:flex-end;
+}
+
+
+/* ==========================================
    ACTIONS
 ========================================== */
 
@@ -597,6 +685,14 @@ body:before{
    MOBILE
 ========================================== */
 
+@media(max-width:850px){
+
+    .review-list{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
 @media(max-width:650px){
 
     .container{
@@ -643,6 +739,19 @@ body:before{
         align-items:flex-start;
     }
 
+    .review-list{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .review-bottom{
+        padding:10px;
+    }
+
+    .review-name{
+        font-size:11px;
+    }
+
 }
 
 </style>
@@ -672,14 +781,11 @@ body:before{
             Authorized access only
         </div>
 
-
         <form id="loginForm">
 
             <div class="login-group">
 
-                <label>
-                    EMAIL
-                </label>
+                <label>EMAIL</label>
 
                 <input
                     type="email"
@@ -690,12 +796,9 @@ body:before{
 
             </div>
 
-
             <div class="login-group">
 
-                <label>
-                    PASSWORD
-                </label>
+                <label>PASSWORD</label>
 
                 <input
                     type="password"
@@ -706,7 +809,6 @@ body:before{
 
             </div>
 
-
             <button
                 type="submit"
                 class="login-btn"
@@ -715,7 +817,6 @@ body:before{
                 LOGIN TO ADMIN PANEL
 
             </button>
-
 
             <div
                 id="loginStatus"
@@ -752,7 +853,7 @@ body:before{
         </h1>
 
         <p>
-            Manage downloads from your Supabase database.
+            Manage downloads and customer reviews.
         </p>
 
     </header>
@@ -776,7 +877,6 @@ body:before{
 
         </div>
 
-
         <button
             type="button"
             id="logoutBtn"
@@ -790,7 +890,9 @@ body:before{
 
 
 
-    <!-- ADD / EDIT -->
+    <!-- ======================================
+         DOWNLOAD FORM
+    ======================================= -->
 
     <section class="panel">
 
@@ -804,9 +906,7 @@ body:before{
 
         </div>
 
-
         <form id="downloadForm">
-
 
             <div class="form-group">
 
@@ -821,7 +921,6 @@ body:before{
                     required>
 
             </div>
-
 
             <div class="form-group">
 
@@ -861,7 +960,6 @@ body:before{
 
             </div>
 
-
             <div class="form-group">
 
                 <label>
@@ -874,7 +972,6 @@ body:before{
                     required></textarea>
 
             </div>
-
 
             <div class="form-group">
 
@@ -890,7 +987,6 @@ body:before{
 
             </div>
 
-
             <div class="button-row">
 
                 <button
@@ -901,7 +997,6 @@ body:before{
                     + ADD DOWNLOAD
 
                 </button>
-
 
                 <button
                     type="button"
@@ -914,7 +1009,6 @@ body:before{
 
             </div>
 
-
             <div
                 id="status"
                 class="status">
@@ -926,7 +1020,9 @@ body:before{
 
 
 
-    <!-- CURRENT DOWNLOADS -->
+    <!-- ======================================
+         CURRENT DOWNLOADS
+    ======================================= -->
 
     <section class="panel">
 
@@ -935,7 +1031,6 @@ body:before{
             <div class="panel-title">
                 CURRENT <span>DOWNLOADS</span>
             </div>
-
 
             <button
                 type="button"
@@ -947,7 +1042,6 @@ body:before{
             </button>
 
         </div>
-
 
         <div
             id="downloadList"
@@ -962,6 +1056,129 @@ body:before{
     </section>
 
 
+
+    <!-- ======================================
+         CUSTOMER REVIEWS FORM
+    ======================================= -->
+
+    <section class="panel">
+
+        <div class="panel-title">
+
+            ADD <span>CUSTOMER REVIEW</span>
+
+        </div>
+
+        <form id="reviewForm">
+
+            <div class="form-group">
+
+                <label>
+                    CUSTOMER NAME
+                </label>
+
+                <input
+                    type="text"
+                    id="reviewCustomerName"
+                    placeholder="Example: Hasinidu"
+                    maxlength="100"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    CUSTOMER SCREENSHOT
+                </label>
+
+                <input
+                    type="file"
+                    id="reviewScreenshot"
+                    class="file-input"
+                    accept="image/png,image/jpeg,image/webp"
+                    required>
+
+                <div class="file-help">
+                    JPG, PNG or WEBP • Maximum 1 MB
+                </div>
+
+
+                <div
+                    id="reviewPreview"
+                    class="file-preview">
+
+                    <img
+                        id="reviewPreviewImage"
+                        src=""
+                        alt="Screenshot Preview">
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="add-btn"
+                id="addReviewBtn">
+
+                + ADD CUSTOMER REVIEW
+
+            </button>
+
+
+            <div
+                id="reviewStatus"
+                class="status">
+            </div>
+
+        </form>
+
+    </section>
+
+
+
+    <!-- ======================================
+         CURRENT REVIEWS
+    ======================================= -->
+
+    <section class="panel">
+
+        <div class="list-header">
+
+            <div class="panel-title">
+                CUSTOMER <span>REVIEWS</span>
+            </div>
+
+            <button
+                type="button"
+                class="refresh-btn"
+                id="refreshReviewsBtn">
+
+                ↻ REFRESH
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="reviewList"
+            class="review-list">
+
+            <div class="empty">
+                Loading reviews...
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- BACK -->
 
     <a
         href="downloads.html"
@@ -1028,6 +1245,9 @@ const userEmail =
 const logoutBtn =
     document.getElementById("logoutBtn");
 
+
+/* DOWNLOAD ELEMENTS */
+
 const form =
     document.getElementById("downloadForm");
 
@@ -1060,6 +1280,36 @@ const refreshBtn =
 
 const downloadList =
     document.getElementById("downloadList");
+
+
+/* REVIEW ELEMENTS */
+
+const reviewForm =
+    document.getElementById("reviewForm");
+
+const reviewCustomerName =
+    document.getElementById("reviewCustomerName");
+
+const reviewScreenshot =
+    document.getElementById("reviewScreenshot");
+
+const reviewPreview =
+    document.getElementById("reviewPreview");
+
+const reviewPreviewImage =
+    document.getElementById("reviewPreviewImage");
+
+const addReviewBtn =
+    document.getElementById("addReviewBtn");
+
+const reviewStatus =
+    document.getElementById("reviewStatus");
+
+const reviewList =
+    document.getElementById("reviewList");
+
+const refreshReviewsBtn =
+    document.getElementById("refreshReviewsBtn");
 
 
 let editingId = null;
@@ -1105,6 +1355,30 @@ function clearStatus(){
 
 
 /* ==========================================
+   REVIEW STATUS
+========================================== */
+
+function showReviewStatus(message,type){
+
+    reviewStatus.textContent =
+        message;
+
+    reviewStatus.className =
+        "status " + type;
+
+}
+
+
+function clearReviewStatus(){
+
+    reviewStatus.textContent = "";
+
+    reviewStatus.className = "status";
+
+}
+
+
+/* ==========================================
    SHOW LOGIN
 ========================================== */
 
@@ -1135,6 +1409,8 @@ function showAdmin(user){
         user.email || "";
 
     loadDownloads();
+
+    loadReviews();
 
 }
 
@@ -1355,7 +1631,7 @@ supabaseClient
 
 
 /* ==========================================
-   RESET FORM
+   RESET DOWNLOAD FORM
 ========================================== */
 
 function resetForm(){
@@ -1379,7 +1655,7 @@ function resetForm(){
 
 
 /* ==========================================
-   ADD / UPDATE
+   ADD / UPDATE DOWNLOAD
 ========================================== */
 
 form.addEventListener(
@@ -1723,7 +1999,7 @@ async function loadDownloads(){
 
 
 /* ==========================================
-   EDIT
+   EDIT DOWNLOAD
 ========================================== */
 
 function editDownload(download){
@@ -1772,7 +2048,7 @@ function editDownload(download){
 
 
 /* ==========================================
-   CANCEL
+   CANCEL DOWNLOAD EDIT
 ========================================== */
 
 cancelBtn.addEventListener(
@@ -1786,7 +2062,7 @@ cancelBtn.addEventListener(
 
 
 /* ==========================================
-   DELETE
+   DELETE DOWNLOAD
 ========================================== */
 
 async function deleteDownload(id){
@@ -1859,7 +2135,7 @@ async function deleteDownload(id){
 
 
 /* ==========================================
-   REFRESH
+   REFRESH DOWNLOADS
 ========================================== */
 
 refreshBtn.addEventListener(
@@ -1880,6 +2156,669 @@ refreshBtn.addEventListener(
             false;
 
         refreshBtn.textContent =
+            "↻ REFRESH";
+
+    }
+);
+
+
+/* ==========================================
+   REVIEW IMAGE PREVIEW
+========================================== */
+
+reviewScreenshot.addEventListener(
+    "change",
+    function(){
+
+        const file =
+            this.files[0];
+
+
+        if(!file){
+
+            reviewPreview.style.display =
+                "none";
+
+            reviewPreviewImage.src =
+                "";
+
+            return;
+        }
+
+
+        if(file.size > 1024 * 1024){
+
+            showReviewStatus(
+                "Screenshot is larger than 1 MB. Please choose a smaller image.",
+                "error"
+            );
+
+            this.value = "";
+
+            reviewPreview.style.display =
+                "none";
+
+            reviewPreviewImage.src =
+                "";
+
+            return;
+        }
+
+
+        if(!file.type.startsWith("image/")){
+
+            showReviewStatus(
+                "Please select an image file.",
+                "error"
+            );
+
+            this.value = "";
+
+            return;
+        }
+
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            function(event){
+
+                reviewPreviewImage.src =
+                    event.target.result;
+
+                reviewPreview.style.display =
+                    "block";
+
+            };
+
+
+        reader.readAsDataURL(file);
+
+        clearReviewStatus();
+
+    }
+);
+
+
+/* ==========================================
+   ADD CUSTOMER REVIEW
+========================================== */
+
+reviewForm.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+
+        const customerName =
+            reviewCustomerName.value.trim();
+
+        const file =
+            reviewScreenshot.files[0];
+
+
+        if(!customerName){
+
+            showReviewStatus(
+                "Please enter customer name.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        if(!file){
+
+            showReviewStatus(
+                "Please select a screenshot.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        if(file.size > 1024 * 1024){
+
+            showReviewStatus(
+                "Screenshot must be 1 MB or smaller.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        if(!file.type.startsWith("image/")){
+
+            showReviewStatus(
+                "Only image files are allowed.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        addReviewBtn.disabled =
+            true;
+
+        addReviewBtn.textContent =
+            "UPLOADING...";
+
+
+        try{
+
+            /*
+             * Create unique filename
+             */
+
+            const extension =
+                file.name
+                    .split(".")
+                    .pop()
+                    .toLowerCase();
+
+
+            const safeName =
+                customerName
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]+/g,"-")
+                    .replace(/^-+|-+$/g,"");
+
+
+            const uniqueName =
+                Date.now() +
+                "-" +
+                Math.random()
+                    .toString(36)
+                    .substring(2,8);
+
+
+            const filePath =
+                safeName +
+                "-" +
+                uniqueName +
+                "." +
+                extension;
+
+
+            /*
+             * Upload screenshot
+             */
+
+            const {
+                error:uploadError
+            } = await supabaseClient
+                .storage
+                .from("customer-reviews")
+                .upload(
+                    filePath,
+                    file,
+                    {
+                        cacheControl:"3600",
+                        upsert:false
+                    }
+                );
+
+
+            if(uploadError){
+
+                console.error(
+                    "Upload Error:",
+                    uploadError
+                );
+
+                showReviewStatus(
+                    "Screenshot upload failed: " +
+                    uploadError.message,
+                    "error"
+                );
+
+                return;
+            }
+
+
+            /*
+             * Get public URL
+             */
+
+            const {
+                data:publicData
+            } = supabaseClient
+                .storage
+                .from("customer-reviews")
+                .getPublicUrl(
+                    filePath
+                );
+
+
+            const screenshotUrl =
+                publicData.publicUrl;
+
+
+            if(!screenshotUrl){
+
+                showReviewStatus(
+                    "Could not create screenshot URL.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            /*
+             * Save review in database
+             */
+
+            const {
+                error:insertError
+            } = await supabaseClient
+                .from("customer_reviews")
+                .insert([
+                    {
+                        customer_name:
+                            customerName,
+
+                        screenshot_url:
+                            screenshotUrl
+                    }
+                ]);
+
+
+            if(insertError){
+
+                console.error(
+                    "Review Insert Error:",
+                    insertError
+                );
+
+
+                /*
+                 * Try to remove uploaded
+                 * screenshot if DB insert fails
+                 */
+
+                await supabaseClient
+                    .storage
+                    .from("customer-reviews")
+                    .remove([
+                        filePath
+                    ]);
+
+
+                showReviewStatus(
+                    "Failed to save review: " +
+                    insertError.message,
+                    "error"
+                );
+
+                return;
+            }
+
+
+            /*
+             * Success
+             */
+
+            reviewForm.reset();
+
+            reviewPreview.style.display =
+                "none";
+
+            reviewPreviewImage.src =
+                "";
+
+
+            showReviewStatus(
+                "Customer review added successfully!",
+                "success"
+            );
+
+
+            await loadReviews();
+
+        }
+        catch(error){
+
+            console.error(
+                "Review Error:",
+                error
+            );
+
+            showReviewStatus(
+                "Something went wrong. Please try again.",
+                "error"
+            );
+
+        }
+        finally{
+
+            addReviewBtn.disabled =
+                false;
+
+            addReviewBtn.textContent =
+                "+ ADD CUSTOMER REVIEW";
+
+        }
+
+    }
+);
+
+
+/* ==========================================
+   LOAD REVIEWS
+========================================== */
+
+async function loadReviews(){
+
+    reviewList.innerHTML = `
+        <div class="empty">
+            Loading reviews...
+        </div>
+    `;
+
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("customer_reviews")
+        .select("*")
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
+
+
+    if(error){
+
+        console.error(
+            "Review Load Error:",
+            error
+        );
+
+        reviewList.innerHTML = `
+            <div class="empty" style="color:#ff4444;">
+                Failed to load reviews.<br><br>
+                ${escapeHTML(error.message)}
+            </div>
+        `;
+
+        return;
+    }
+
+
+    if(
+        !data ||
+        data.length === 0
+    ){
+
+        reviewList.innerHTML = `
+            <div class="empty">
+                No customer reviews added yet.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    reviewList.innerHTML = "";
+
+
+    data.forEach(
+        function(review){
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "review-item";
+
+
+            item.innerHTML = `
+
+                <div class="review-image">
+
+                    <img
+                        src="${escapeHTML(
+                            review.screenshot_url
+                        )}"
+                        alt="${escapeHTML(
+                            review.customer_name ||
+                            "Customer Review"
+                        )}"
+                        loading="lazy">
+
+                </div>
+
+
+                <div class="review-bottom">
+
+                    <div class="review-name">
+                        ${escapeHTML(
+                            review.customer_name ||
+                            "Customer"
+                        )}
+                    </div>
+
+
+                    <div class="review-actions">
+
+                        <button
+                            type="button"
+                            class="delete-btn">
+
+                            DELETE
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            item
+                .querySelector(".delete-btn")
+                .addEventListener(
+                    "click",
+                    function(){
+
+                        deleteReview(
+                            review
+                        );
+
+                    }
+                );
+
+
+            reviewList.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   DELETE REVIEW
+========================================== */
+
+async function deleteReview(review){
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to delete this customer review?"
+        );
+
+
+    if(!confirmed){
+        return;
+    }
+
+
+    try{
+
+        /*
+         * Extract file path from public URL
+         */
+
+        let filePath = null;
+
+
+        try{
+
+            const marker =
+                "/storage/v1/object/public/customer-reviews/";
+
+            const index =
+                review.screenshot_url
+                    .indexOf(marker);
+
+
+            if(index !== -1){
+
+                filePath =
+                    decodeURIComponent(
+                        review.screenshot_url
+                            .substring(
+                                index + marker.length
+                            )
+                    );
+
+            }
+
+        }
+        catch(error){
+
+            console.warn(
+                "Could not extract storage path:",
+                error
+            );
+
+        }
+
+
+        /*
+         * Delete database row first
+         */
+
+        const {
+            error:deleteError
+        } = await supabaseClient
+            .from("customer_reviews")
+            .delete()
+            .eq(
+                "id",
+                review.id
+            );
+
+
+        if(deleteError){
+
+            console.error(
+                "Review Delete Error:",
+                deleteError
+            );
+
+            showReviewStatus(
+                "Failed to delete review: " +
+                deleteError.message,
+                "error"
+            );
+
+            return;
+        }
+
+
+        /*
+         * Delete screenshot from Storage
+         */
+
+        if(filePath){
+
+            const {
+                error:storageError
+            } = await supabaseClient
+                .storage
+                .from("customer-reviews")
+                .remove([
+                    filePath
+                ]);
+
+
+            if(storageError){
+
+                console.warn(
+                    "Storage delete warning:",
+                    storageError
+                );
+
+            }
+
+        }
+
+
+        showReviewStatus(
+            "Customer review deleted successfully!",
+            "success"
+        );
+
+
+        await loadReviews();
+
+    }
+    catch(error){
+
+        console.error(
+            "Delete Review Error:",
+            error
+        );
+
+        showReviewStatus(
+            "Something went wrong while deleting.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   REFRESH REVIEWS
+========================================== */
+
+refreshReviewsBtn.addEventListener(
+    "click",
+    async function(){
+
+        refreshReviewsBtn.disabled =
+            true;
+
+        refreshReviewsBtn.textContent =
+            "↻ LOADING...";
+
+
+        await loadReviews();
+
+
+        refreshReviewsBtn.disabled =
+            false;
+
+        refreshReviewsBtn.textContent =
             "↻ REFRESH";
 
     }
@@ -1912,4 +2851,3 @@ checkSession();
 
 </body>
 </html>
-```
