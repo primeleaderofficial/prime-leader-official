@@ -378,6 +378,7 @@ body:before{
     }
 }
 </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -718,7 +719,18 @@ body:before{
 
 <script>
 
-function showDownloadTab(tabId,button){
+const SUPABASE_URL = "https://qelvvvldriqtialnpelk.supabase.co";
+const SUPABASE_KEY = "sb_publishable_1-FLjKgb3U8xZyA_sWQ0Ow_LzNYl8ed";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+// TAB SYSTEM
+
+function showDownloadTab(tabId, button){
 
     document
         .querySelectorAll('.download-tab-content')
@@ -738,6 +750,28 @@ function showDownloadTab(tabId,button){
 
     button.classList.add('active');
 }
+
+
+// LOAD DOWNLOADS
+
+async function loadDownloads(){
+
+    const { data, error } = await supabaseClient
+        .from('downloads')
+        .select('*')
+        .order('created_at', { ascending:false });
+
+    if(error){
+
+        console.error("Supabase Error:", error);
+
+        return;
+    }
+
+    console.log("Downloads loaded:", data);
+}
+
+loadDownloads();
 
 </script>
 
