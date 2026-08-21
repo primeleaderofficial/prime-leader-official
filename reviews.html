@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Customer Reviews | PRIME LEADER Official</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(230,0,0,.20),
+            transparent 35%
+        ),
+        #050505;
+    color:#fff;
+    min-height:100vh;
+}
+
+
+/* ==========================================
+   BACKGROUND EFFECT
+========================================== */
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,.012) 1px,
+            transparent 1px
+        );
+
+    background-size:100% 4px;
+    opacity:.25;
+    z-index:0;
+}
+
+
+/* ==========================================
+   PAGE
+========================================== */
+
+.page{
+    position:relative;
+    z-index:1;
+
+    width:94%;
+    max-width:1500px;
+
+    margin:auto;
+
+    padding:
+        55px
+        0
+        80px;
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.header{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.brand{
+    color:#ff2020;
+
+    font-size:12px;
+    font-weight:900;
+
+    letter-spacing:5px;
+
+    margin-bottom:14px;
+}
+
+.header h1{
+    font-size:44px;
+    line-height:1.1;
+
+    font-weight:900;
+}
+
+.header h1 span{
+    color:#ff2020;
+}
+
+.header p{
+    color:#777;
+
+    font-size:13px;
+
+    margin-top:12px;
+
+    line-height:1.6;
+}
+
+
+/* ==========================================
+   RED LINE
+========================================== */
+
+.header-line{
+    width:70px;
+    height:3px;
+
+    background:#e60000;
+
+    margin:
+        20px
+        auto
+        0;
+
+    border-radius:20px;
+
+    box-shadow:
+        0 0 15px
+        rgba(230,0,0,.5);
+}
+
+
+/* ==========================================
+   REVIEWS GRID
+========================================== */
+
+.review-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap:18px;
+}
+
+
+/* ==========================================
+   REVIEW CARD
+========================================== */
+
+.review-card{
+
+    background:
+        linear-gradient(
+            145deg,
+            #111,
+            #090909
+        );
+
+    border:
+        1px solid #292929;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.28);
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+}
+
+.review-card:hover{
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        #5a1717;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.45);
+}
+
+
+/* ==========================================
+   IMAGE
+========================================== */
+
+.review-image{
+
+    width:100%;
+
+    aspect-ratio:1 / 1;
+
+    background:#080808;
+
+    overflow:hidden;
+
+    position:relative;
+}
+
+.review-image:after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.035),
+            transparent 40%
+        );
+}
+
+.review-image img{
+
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+    transition:
+        transform .35s ease;
+}
+
+.review-card:hover
+.review-image img{
+
+    transform:
+        scale(1.035);
+}
+
+
+/* ==========================================
+   CARD FOOTER
+========================================== */
+
+.review-info{
+
+    padding:
+        14px
+        13px
+        15px;
+}
+
+.review-name{
+
+    color:#fff;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    letter-spacing:.3px;
+
+    word-break:break-word;
+
+    text-align:center;
+}
+
+
+/* ==========================================
+   SMALL RED INDICATOR
+========================================== */
+
+.review-name:before{
+
+    content:"";
+
+    display:inline-block;
+
+    width:5px;
+    height:5px;
+
+    background:#e60000;
+
+    border-radius:50%;
+
+    margin:
+        0
+        7px
+        1px
+        0;
+
+    box-shadow:
+        0 0 8px
+        rgba(230,0,0,.5);
+}
+
+
+/* ==========================================
+   LOADING
+========================================== */
+
+.loading{
+
+    grid-column:
+        1 / -1;
+
+    text-align:center;
+
+    padding:70px 20px;
+
+    color:#666;
+
+    font-size:12px;
+
+    border:
+        1px dashed #292929;
+
+    border-radius:12px;
+}
+
+.loading-spinner{
+
+    width:28px;
+    height:28px;
+
+    border:
+        2px solid #292929;
+
+    border-top-color:
+        #e60000;
+
+    border-radius:50%;
+
+    margin:
+        0
+        auto
+        15px;
+
+    animation:
+        spin .8s linear infinite;
+}
+
+@keyframes spin{
+
+    to{
+        transform:
+            rotate(360deg);
+    }
+
+}
+
+
+/* ==========================================
+   EMPTY
+========================================== */
+
+.empty{
+
+    grid-column:
+        1 / -1;
+
+    text-align:center;
+
+    padding:70px 20px;
+
+    color:#666;
+
+    font-size:12px;
+
+    border:
+        1px dashed #292929;
+
+    border-radius:12px;
+}
+
+
+/* ==========================================
+   ERROR
+========================================== */
+
+.error{
+
+    grid-column:
+        1 / -1;
+
+    text-align:center;
+
+    padding:50px 20px;
+
+    color:#ff5555;
+
+    font-size:12px;
+
+    line-height:1.7;
+
+    border:
+        1px solid #451616;
+
+    background:#100707;
+
+    border-radius:12px;
+}
+
+
+/* ==========================================
+   BACK BUTTON
+========================================== */
+
+.back-button{
+
+    display:block;
+
+    width:max-content;
+
+    margin:
+        45px
+        auto
+        0;
+
+    padding:
+        12px
+        24px;
+
+    color:#aaa;
+
+    text-decoration:none;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    letter-spacing:.5px;
+
+    background:#101010;
+
+    border:
+        1px solid #303030;
+
+    border-radius:7px;
+
+    transition:.2s;
+}
+
+.back-button:hover{
+
+    color:#fff;
+
+    border-color:#e60000;
+
+    background:#160909;
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.footer{
+
+    text-align:center;
+
+    color:#444;
+
+    font-size:10px;
+
+    margin-top:50px;
+
+    letter-spacing:.5px;
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media(max-width:1100px){
+
+    .review-grid{
+
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
+    }
+
+}
+
+
+/* ==========================================
+   SMALL TABLET
+========================================== */
+
+@media(max-width:850px){
+
+    .page{
+
+        padding-top:40px;
+
+    }
+
+    .header h1{
+
+        font-size:38px;
+
+    }
+
+    .review-grid{
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap:14px;
+
+    }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:600px){
+
+    .page{
+
+        width:92%;
+
+        padding:
+            30px
+            0
+            55px;
+
+    }
+
+    .header{
+
+        margin-bottom:30px;
+
+    }
+
+    .brand{
+
+        font-size:10px;
+
+        letter-spacing:4px;
+
+    }
+
+    .header h1{
+
+        font-size:30px;
+
+    }
+
+    .header p{
+
+        font-size:11px;
+
+    }
+
+    .review-grid{
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap:10px;
+
+    }
+
+    .review-info{
+
+        padding:
+            10px
+            8px
+            11px;
+
+    }
+
+    .review-name{
+
+        font-size:10px;
+
+    }
+
+    .back-button{
+
+        margin-top:30px;
+
+        padding:
+            11px
+            20px;
+
+    }
+
+}
+
+
+/* ==========================================
+   VERY SMALL MOBILE
+========================================== */
+
+@media(max-width:360px){
+
+    .review-grid{
+
+        gap:8px;
+
+    }
+
+    .review-name{
+
+        font-size:9px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- ======================================
+         HEADER
+    ======================================= -->
+
+    <header class="header">
+
+        <div class="brand">
+            PRIME LEADER OFFICIAL
+        </div>
+
+        <h1>
+            CUSTOMER <span>REVIEWS.</span>
+        </h1>
+
+        <p>
+            Real customer feedback and results.
+        </p>
+
+        <div class="header-line"></div>
+
+    </header>
+
+
+
+    <!-- ======================================
+         REVIEWS
+    ======================================= -->
+
+    <main
+        id="reviewGrid"
+        class="review-grid">
+
+        <div class="loading">
+
+            <div class="loading-spinner"></div>
+
+            Loading customer reviews...
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ======================================
+         BACK
+    ======================================= -->
+
+    <a
+        href="index.html"
+        class="back-button">
+
+        ← BACK TO PRIME LEADER
+
+    </a>
+
+
+
+    <div class="footer">
+
+        © PRIME LEADER OFFICIAL
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+/* ==========================================
+   SUPABASE
+========================================== */
+
+const SUPABASE_URL =
+    "https://qelvvvldriqtialnpelk.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_1-FLjKgb3U8xZyA_sWQ0Ow_LzNYl8ed";
+
+
+const supabaseClient =
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* ==========================================
+   ELEMENT
+========================================== */
+
+const reviewGrid =
+    document.getElementById(
+        "reviewGrid"
+    );
+
+
+/* ==========================================
+   LOAD REVIEWS
+========================================== */
+
+async function loadReviews(){
+
+    reviewGrid.innerHTML = `
+
+        <div class="loading">
+
+            <div class="loading-spinner"></div>
+
+            Loading customer reviews...
+
+        </div>
+
+    `;
+
+
+    try{
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+
+            .from("customer_reviews")
+
+            .select(
+                "id, customer_name, screenshot_url, created_at"
+            )
+
+            .order(
+                "created_at",
+                {
+                    ascending:false
+                }
+            );
+
+
+        if(error){
+
+            console.error(
+                "Reviews Error:",
+                error
+            );
+
+            reviewGrid.innerHTML = `
+
+                <div class="error">
+
+                    Unable to load customer reviews.
+
+                    <br>
+
+                    Please try again later.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        if(
+            !data ||
+            data.length === 0
+        ){
+
+            reviewGrid.innerHTML = `
+
+                <div class="empty">
+
+                    No customer reviews available yet.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        reviewGrid.innerHTML = "";
+
+
+        data.forEach(
+            function(review){
+
+                const card =
+                    document.createElement(
+                        "article"
+                    );
+
+
+                card.className =
+                    "review-card";
+
+
+                card.innerHTML = `
+
+                    <div class="review-image">
+
+                        <img
+
+                            src="${escapeHTML(
+                                review.screenshot_url
+                            )}"
+
+                            alt="${escapeHTML(
+                                review.customer_name ||
+                                "Customer Review"
+                            )}"
+
+                            loading="lazy"
+
+                        >
+
+                    </div>
+
+
+                    <div class="review-info">
+
+                        <div class="review-name">
+
+                            ${escapeHTML(
+                                review.customer_name ||
+                                "Customer"
+                            )}
+
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                reviewGrid.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "Unexpected Error:",
+            error
+        );
+
+
+        reviewGrid.innerHTML = `
+
+            <div class="error">
+
+                Something went wrong.
+
+                <br>
+
+                Please refresh the page.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ==========================================
+   ESCAPE HTML
+========================================== */
+
+function escapeHTML(value){
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* ==========================================
+   START
+========================================== */
+
+loadReviews();
+
+</script>
+
+</body>
+</html>
