@@ -20,7 +20,11 @@
 body{
     font-family:Arial,Helvetica,sans-serif;
     background:
-        radial-gradient(circle at 50% -10%,rgba(230,0,0,.16),transparent 35%),
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(230,0,0,.16),
+            transparent 35%
+        ),
         #050505;
     color:#fff;
     min-height:100vh;
@@ -38,6 +42,7 @@ body:before{
     background-size:100% 4px;
     opacity:.25;
 }
+
 
 /* =========================================
    HEADER
@@ -74,6 +79,7 @@ body:before{
     line-height:1.6;
 }
 
+
 /* =========================================
    CONTAINER
 ========================================= */
@@ -84,6 +90,7 @@ body:before{
     margin:auto;
     padding-bottom:70px;
 }
+
 
 /* =========================================
    TABS
@@ -126,6 +133,7 @@ body:before{
     box-shadow:0 5px 20px rgba(230,0,0,.22);
 }
 
+
 /* =========================================
    CONTENT
 ========================================= */
@@ -153,8 +161,9 @@ body:before{
 
 }
 
+
 /* =========================================
-   DOWNLOAD CARD
+   CARD
 ========================================= */
 
 .download-card{
@@ -164,7 +173,11 @@ body:before{
     gap:20px;
     padding:25px;
     margin-bottom:17px;
-    background:linear-gradient(145deg,#121212,#0b0b0b);
+    background:linear-gradient(
+        145deg,
+        #121212,
+        #0b0b0b
+    );
     border:1px solid #292929;
     border-radius:14px;
     overflow:hidden;
@@ -188,6 +201,11 @@ body:before{
     box-shadow:0 12px 35px rgba(0,0,0,.5);
 }
 
+
+/* =========================================
+   ICON
+========================================= */
+
 .download-icon{
     width:62px;
     height:62px;
@@ -202,6 +220,11 @@ body:before{
     font-size:20px;
     font-weight:900;
 }
+
+
+/* =========================================
+   INFO
+========================================= */
 
 .download-info{
     flex:1;
@@ -233,6 +256,7 @@ body:before{
     font-size:11px;
 }
 
+
 /* =========================================
    SOURCE
 ========================================= */
@@ -258,6 +282,7 @@ body:before{
     background:#e60000;
 }
 
+
 /* =========================================
    FEATURED
 ========================================= */
@@ -279,6 +304,7 @@ body:before{
     font-weight:900;
     letter-spacing:1px;
 }
+
 
 /* =========================================
    DOWNLOAD BUTTON
@@ -306,8 +332,9 @@ body:before{
     transform:translateY(-2px);
 }
 
+
 /* =========================================
-   EMPTY / LOADING / ERROR
+   EMPTY
 ========================================= */
 
 .empty-download{
@@ -333,6 +360,11 @@ body:before{
     color:#777;
 }
 
+
+/* =========================================
+   LOADING
+========================================= */
+
 .loading{
     text-align:center;
     padding:50px 20px;
@@ -343,6 +375,11 @@ body:before{
     color:#e60000;
 }
 
+
+/* =========================================
+   ERROR
+========================================= */
+
 .error-box{
     text-align:center;
     padding:40px 20px;
@@ -352,308 +389,9 @@ body:before{
     color:#ff5555;
 }
 
-/* =========================================
-   CUSTOMER REVIEWS
-========================================= */
-
-.reviews-section{
-    margin-top:65px;
-}
-
-.reviews-header{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.reviews-label{
-    display:inline-block;
-    color:#ff2020;
-    font-size:11px;
-    font-weight:900;
-    letter-spacing:3px;
-    margin-bottom:10px;
-}
-
-.reviews-header h2{
-    font-size:32px;
-    letter-spacing:1px;
-}
-
-.reviews-header h2 span{
-    color:#ff2020;
-}
-
-.reviews-header p{
-    color:#777;
-    margin-top:10px;
-    font-size:13px;
-}
-
-.review-list{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:17px;
-}
-
-.review-card{
-    background:linear-gradient(145deg,#121212,#0b0b0b);
-    border:1px solid #292929;
-    border-radius:14px;
-    overflow:hidden;
-    transition:.25s;
-}
-
-.review-card:hover{
-    border-color:#e60000;
-    transform:translateY(-3px);
-    box-shadow:0 12px 35px rgba(0,0,0,.5);
-}
-
-.review-image{
-    position:relative;
-    width:100%;
-    aspect-ratio:1 / 1;
-    background:#080808;
-    overflow:hidden;
-    cursor:zoom-in;
-}
-
-.review-image:after{
-    content:"CLICK TO VIEW";
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    padding:8px 12px;
-    background:rgba(0,0,0,.75);
-    border:1px solid rgba(255,255,255,.2);
-    border-radius:6px;
-    color:#fff;
-    font-size:9px;
-    font-weight:900;
-    letter-spacing:1px;
-    opacity:0;
-    transition:.2s;
-    pointer-events:none;
-}
-
-.review-image:hover:after{
-    opacity:1;
-}
-
-.review-image img{
-    width:100%;
-    height:100%;
-    display:block;
-    object-fit:cover;
-    transition:.3s;
-}
-
-.review-image:hover img{
-    transform:scale(1.03);
-}
-
-.review-bottom{
-    padding:15px;
-}
-
-.review-name{
-    font-size:14px;
-    font-weight:900;
-    color:#fff;
-}
-
-.review-small{
-    display:block;
-    margin-top:5px;
-    color:#555;
-    font-size:9px;
-    letter-spacing:.5px;
-}
-
-.reviews-loading{
-    grid-column:1 / -1;
-    text-align:center;
-    padding:50px 20px;
-    color:#777;
-}
-
-.no-reviews{
-    grid-column:1 / -1;
-    text-align:center;
-    padding:50px 20px;
-    background:#0d0d0d;
-    border:1px solid #292929;
-    border-radius:14px;
-    color:#777;
-}
 
 /* =========================================
-   REVIEW POPUP / LIGHTBOX
-========================================= */
-
-.review-popup{
-    position:fixed;
-    inset:0;
-    z-index:99999;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:30px;
-
-    background:rgba(0,0,0,.94);
-
-    backdrop-filter:blur(10px);
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:
-        opacity .25s ease,
-        visibility .25s ease;
-
-    overflow:hidden;
-}
-
-.review-popup.active{
-    opacity:1;
-    visibility:visible;
-}
-
-.review-popup-image-wrap{
-    position:relative;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    width:100%;
-    height:100%;
-
-    overflow:hidden;
-}
-
-#reviewPopupImage{
-    max-width:90vw;
-    max-height:88vh;
-
-    width:auto;
-    height:auto;
-
-    object-fit:contain;
-
-    border-radius:10px;
-    border:1px solid #333;
-
-    box-shadow:
-        0 20px 80px rgba(0,0,0,.9);
-
-    transform-origin:center center;
-
-    cursor:grab;
-
-    user-select:none;
-
-    transition:transform .15s ease;
-}
-
-#reviewPopupImage.dragging{
-    cursor:grabbing;
-    transition:none;
-}
-
-.review-popup-close{
-    position:absolute;
-
-    top:18px;
-    right:22px;
-
-    z-index:10;
-
-    width:46px;
-    height:46px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border:1px solid #444;
-    border-radius:50%;
-
-    background:#111;
-    color:#fff;
-
-    font-size:30px;
-    line-height:1;
-
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-.review-popup-close:hover{
-    background:#e60000;
-    border-color:#e60000;
-}
-
-.zoom-controls{
-    position:absolute;
-
-    bottom:22px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    z-index:10;
-
-    display:flex;
-    align-items:center;
-    gap:7px;
-
-    padding:7px;
-
-    background:rgba(10,10,10,.92);
-
-    border:1px solid #333;
-    border-radius:9px;
-}
-
-.zoom-btn{
-    width:38px;
-    height:38px;
-
-    border:1px solid #333;
-    border-radius:6px;
-
-    background:#181818;
-    color:#fff;
-
-    font-size:18px;
-    font-weight:bold;
-
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-.zoom-btn:hover{
-    background:#e60000;
-    border-color:#e60000;
-}
-
-.zoom-level{
-    min-width:55px;
-    text-align:center;
-
-    color:#aaa;
-    font-size:10px;
-    font-weight:900;
-}
-
-/* =========================================
-   BACK
+   BACK BUTTON
 ========================================= */
 
 .back-btn{
@@ -675,17 +413,10 @@ body:before{
     border-color:#e60000;
 }
 
+
 /* =========================================
    MOBILE
 ========================================= */
-
-@media(max-width:850px){
-
-    .review-list{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-}
 
 @media(max-width:650px){
 
@@ -737,69 +468,6 @@ body:before{
         top:12px;
     }
 
-    .reviews-section{
-        margin-top:45px;
-    }
-
-    .reviews-header h2{
-        font-size:25px;
-    }
-
-    .review-list{
-        grid-template-columns:repeat(2,1fr);
-        gap:10px;
-    }
-
-    .review-bottom{
-        padding:10px;
-    }
-
-    .review-name{
-        font-size:11px;
-    }
-
-    .review-small{
-        font-size:8px;
-    }
-
-    .review-popup{
-        padding:10px;
-    }
-
-    #reviewPopupImage{
-        max-width:96vw;
-        max-height:82vh;
-        border-radius:7px;
-    }
-
-    .review-popup-close{
-        top:10px;
-        right:10px;
-        width:40px;
-        height:40px;
-        font-size:27px;
-    }
-
-    .zoom-controls{
-        bottom:12px;
-    }
-
-}
-
-
-/* =========================================
-   REDUCE MOTION
-========================================= */
-
-@media(prefers-reduced-motion:reduce){
-
-    *,
-    *:before,
-    *:after{
-        animation:none !important;
-        transition:none !important;
-    }
-
 }
 
 </style>
@@ -808,10 +476,6 @@ body:before{
 
 <body>
 
-
-<!-- =========================================
-     HEADER
-========================================= -->
 
 <header class="header">
 
@@ -834,9 +498,7 @@ body:before{
 <main class="container">
 
 
-    <!-- =========================================
-         DOWNLOAD TABS
-    ========================================= -->
+    <!-- DOWNLOAD TABS -->
 
     <div class="download-tabs">
 
@@ -938,120 +600,16 @@ body:before{
     </div>
 
 
-    <!-- =========================================
-         CUSTOMER REVIEWS
-    ========================================= -->
-
-    <section class="reviews-section">
-
-        <div class="reviews-header">
-
-            <span class="reviews-label">
-                CUSTOMER FEEDBACK
-            </span>
-
-            <h2>
-                OUR <span>CUSTOMER REVIEWS.</span>
-            </h2>
-
-            <p>
-                Real customer screenshots and feedback
-                from PRIME LEADER users.
-            </p>
-
-        </div>
-
-
-        <div
-            id="reviewList"
-            class="review-list">
-
-            <div class="reviews-loading">
-                Loading <span style="color:#e60000;">
-                    customer reviews...
-                </span>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================================
-         BACK BUTTON
-    ========================================= -->
-
     <a
         class="back-btn"
         href="index.html">
+
         ← BACK TO HOME
+
     </a>
 
 
 </main>
-
-
-<!-- =========================================
-     REVIEW IMAGE POPUP
-========================================= -->
-
-<div
-    id="reviewPopup"
-    class="review-popup">
-
-
-    <button
-        type="button"
-        class="review-popup-close"
-        id="reviewPopupClose"
-        aria-label="Close">
-        ×
-    </button>
-
-
-    <div class="review-popup-image-wrap">
-
-        <img
-            id="reviewPopupImage"
-            src=""
-            alt="Customer Review Screenshot"
-            draggable="false">
-
-    </div>
-
-
-    <div class="zoom-controls">
-
-        <button
-            type="button"
-            class="zoom-btn"
-            id="zoomOutBtn">
-            −
-        </button>
-
-        <div
-            class="zoom-level"
-            id="zoomLevel">
-            100%
-        </div>
-
-        <button
-            type="button"
-            class="zoom-btn"
-            id="zoomInBtn">
-            +
-        </button>
-
-        <button
-            type="button"
-            class="zoom-btn"
-            id="zoomResetBtn">
-            ⟳
-        </button>
-
-    </div>
-
-</div>
 
 
 <script>
@@ -1078,10 +636,12 @@ const supabaseClient =
    TAB SYSTEM
 ========================================= */
 
-function showDownloadTab(tabId,button){
+function showDownloadTab(tabId, button){
 
     document
-        .querySelectorAll(".download-tab-content")
+        .querySelectorAll(
+            ".download-tab-content"
+        )
         .forEach(function(content){
 
             content.classList.remove(
@@ -1092,7 +652,9 @@ function showDownloadTab(tabId,button){
 
 
     document
-        .querySelectorAll(".download-tab")
+        .querySelectorAll(
+            ".download-tab"
+        )
         .forEach(function(tab){
 
             tab.classList.remove(
@@ -1127,7 +689,7 @@ function showDownloadTab(tabId,button){
 
 
 /* =========================================
-   ICON
+   CATEGORY ICON
 ========================================= */
 
 function getCategoryIcon(category){
@@ -1198,16 +760,18 @@ async function loadDownloads(){
         const {
             data,
             error
-        } =
-            await supabaseClient
-                .from("downloads")
-                .select("*")
-                .order(
-                    "created_at",
-                    {
-                        ascending:false
-                    }
-                );
+        } = await supabaseClient
+
+            .from("downloads")
+
+            .select("*")
+
+            .order(
+                "created_at",
+                {
+                    ascending:false
+                }
+            );
 
 
         if(error){
@@ -1218,13 +782,18 @@ async function loadDownloads(){
             );
 
 
-            Object.values(sections)
+            Object
+                .values(sections)
                 .forEach(function(section){
 
                     section.innerHTML = `
+
                         <div class="error-box">
+
                             Failed to load downloads.
+
                         </div>
+
                     `;
 
                 });
@@ -1234,7 +803,12 @@ async function loadDownloads(){
         }
 
 
-        Object.values(sections)
+        /*
+         * Clear loading
+         */
+
+        Object
+            .values(sections)
             .forEach(function(section){
 
                 section.innerHTML = "";
@@ -1242,12 +816,17 @@ async function loadDownloads(){
             });
 
 
+        /*
+         * No downloads
+         */
+
         if(
             !data ||
             data.length === 0
         ){
 
-            Object.values(sections)
+            Object
+                .values(sections)
                 .forEach(function(section){
 
                     section.innerHTML = `
@@ -1277,6 +856,10 @@ async function loadDownloads(){
         }
 
 
+        /*
+         * Prevent duplicates
+         */
+
         const usedIds =
             new Set();
 
@@ -1297,8 +880,14 @@ async function loadDownloads(){
             }
 
 
-            usedIds.add(uniqueId);
+            usedIds.add(
+                uniqueId
+            );
 
+
+            /*
+             * Category
+             */
 
             const category =
                 String(
@@ -1315,10 +904,19 @@ async function loadDownloads(){
 
             if(!section){
 
+                console.warn(
+                    "Unknown category:",
+                    category
+                );
+
                 return;
 
             }
 
+
+            /*
+             * Create card
+             */
 
             const card =
                 document.createElement(
@@ -1329,6 +927,10 @@ async function loadDownloads(){
             card.className =
                 "download-card";
 
+
+            /*
+             * Featured
+             */
 
             if(download.featured){
 
@@ -1354,7 +956,11 @@ async function loadDownloads(){
 
                 <div class="download-icon">
 
-                    ${getCategoryIcon(category)}
+                    ${
+                        getCategoryIcon(
+                            category
+                        )
+                    }
 
                 </div>
 
@@ -1438,7 +1044,12 @@ async function loadDownloads(){
         });
 
 
-        Object.entries(sections)
+        /*
+         * Empty categories
+         */
+
+        Object
+            .entries(sections)
             .forEach(function([
                 category,
                 section
@@ -1461,7 +1072,6 @@ async function loadDownloads(){
                                 ${
                                     category.toUpperCase()
                                 }
-
                                 COMING SOON
 
                             </h2>
@@ -1481,7 +1091,6 @@ async function loadDownloads(){
 
             });
 
-
     }
     catch(error){
 
@@ -1496,788 +1105,32 @@ async function loadDownloads(){
 
 
 /* =========================================
-   LOAD CUSTOMER REVIEWS
-========================================= */
-
-async function loadReviews(){
-
-    const reviewList =
-        document.getElementById(
-            "reviewList"
-        );
-
-
-    reviewList.innerHTML = `
-
-        <div class="reviews-loading">
-
-            Loading
-            <span style="color:#e60000;">
-                customer reviews...
-            </span>
-
-        </div>
-
-    `;
-
-
-    try{
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("customer_reviews")
-                .select("*")
-                .order(
-                    "created_at",
-                    {
-                        ascending:false
-                    }
-                );
-
-
-        if(error){
-
-            console.error(
-                "Review Load Error:",
-                error
-            );
-
-
-            reviewList.innerHTML = `
-
-                <div class="error-box"
-                     style="grid-column:1/-1;">
-
-                    Failed to load customer reviews.
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-
-        if(
-            !data ||
-            data.length === 0
-        ){
-
-            reviewList.innerHTML = `
-
-                <div class="no-reviews">
-
-                    No customer reviews yet.
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-
-        reviewList.innerHTML = "";
-
-
-        data.forEach(function(review){
-
-            const card =
-                document.createElement(
-                    "article"
-                );
-
-
-            card.className =
-                "review-card";
-
-
-            const image =
-                document.createElement(
-                    "div"
-                );
-
-
-            image.className =
-                "review-image";
-
-
-            const img =
-                document.createElement(
-                    "img"
-                );
-
-
-            img.src =
-                review.screenshot_url || "";
-
-
-            img.alt =
-                review.customer_name ||
-                "Customer Review";
-
-
-            img.loading =
-                "lazy";
-
-
-            img.draggable =
-                false;
-
-
-            image.addEventListener(
-                "click",
-                function(){
-
-                    openReviewPopup(
-                        review.screenshot_url
-                    );
-
-                }
-            );
-
-
-            image.appendChild(
-                img
-            );
-
-
-            const bottom =
-                document.createElement(
-                    "div"
-                );
-
-
-            bottom.className =
-                "review-bottom";
-
-
-            const name =
-                document.createElement(
-                    "div"
-                );
-
-
-            name.className =
-                "review-name";
-
-
-            name.textContent =
-                review.customer_name ||
-                "Customer";
-
-
-            const small =
-                document.createElement(
-                    "small"
-                );
-
-
-            small.className =
-                "review-small";
-
-
-            small.textContent =
-                "PRIME LEADER CUSTOMER";
-
-
-            bottom.appendChild(
-                name
-            );
-
-            bottom.appendChild(
-                small
-            );
-
-
-            card.appendChild(
-                image
-            );
-
-            card.appendChild(
-                bottom
-            );
-
-
-            reviewList.appendChild(
-                card
-            );
-
-        });
-
-
-    }
-    catch(error){
-
-        console.error(
-            "Review loading error:",
-            error
-        );
-
-
-        reviewList.innerHTML = `
-
-            <div class="error-box"
-                 style="grid-column:1/-1;">
-
-                Something went wrong while
-                loading reviews.
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-
-/* =========================================
-   REVIEW POPUP VARIABLES
-========================================= */
-
-const reviewPopup =
-    document.getElementById(
-        "reviewPopup"
-    );
-
-const reviewPopupImage =
-    document.getElementById(
-        "reviewPopupImage"
-    );
-
-const reviewPopupClose =
-    document.getElementById(
-        "reviewPopupClose"
-    );
-
-const zoomInBtn =
-    document.getElementById(
-        "zoomInBtn"
-    );
-
-const zoomOutBtn =
-    document.getElementById(
-        "zoomOutBtn"
-    );
-
-const zoomResetBtn =
-    document.getElementById(
-        "zoomResetBtn"
-    );
-
-const zoomLevel =
-    document.getElementById(
-        "zoomLevel"
-    );
-
-
-let currentZoom = 1;
-
-let translateX = 0;
-let translateY = 0;
-
-let isDragging = false;
-
-let dragStartX = 0;
-let dragStartY = 0;
-
-let startTranslateX = 0;
-let startTranslateY = 0;
-
-
-/* =========================================
-   OPEN POPUP
-========================================= */
-
-function openReviewPopup(imageUrl){
-
-    if(!imageUrl){
-        return;
-    }
-
-
-    reviewPopupImage.src =
-        imageUrl;
-
-
-    currentZoom =
-        1;
-
-
-    translateX =
-        0;
-
-    translateY =
-        0;
-
-
-    updateZoom();
-
-
-    reviewPopup.classList.add(
-        "active"
-    );
-
-
-    document.body.style.overflow =
-        "hidden";
-
-}
-
-
-/* =========================================
-   CLOSE POPUP
-========================================= */
-
-function closeReviewPopup(){
-
-    reviewPopup.classList.remove(
-        "active"
-    );
-
-
-    reviewPopupImage.src =
-        "";
-
-
-    currentZoom =
-        1;
-
-
-    translateX =
-        0;
-
-    translateY =
-        0;
-
-
-    document.body.style.overflow =
-        "";
-
-}
-
-
-/* =========================================
-   UPDATE ZOOM
-========================================= */
-
-function updateZoom(){
-
-    reviewPopupImage.style.transform =
-        `
-        translate(
-            ${translateX}px,
-            ${translateY}px
-        )
-        scale(
-            ${currentZoom}
-        )
-        `;
-
-
-    zoomLevel.textContent =
-        Math.round(
-            currentZoom * 100
-        ) + "%";
-
-}
-
-
-/* =========================================
-   ZOOM IN
-========================================= */
-
-zoomInBtn.addEventListener(
-    "click",
-    function(event){
-
-        event.stopPropagation();
-
-
-        currentZoom =
-            Math.min(
-                currentZoom + .25,
-                4
-            );
-
-
-        updateZoom();
-
-    }
-);
-
-
-/* =========================================
-   ZOOM OUT
-========================================= */
-
-zoomOutBtn.addEventListener(
-    "click",
-    function(event){
-
-        event.stopPropagation();
-
-
-        currentZoom =
-            Math.max(
-                currentZoom - .25,
-                .5
-            );
-
-
-        if(currentZoom <= 1){
-
-            translateX =
-                0;
-
-            translateY =
-                0;
-
-        }
-
-
-        updateZoom();
-
-    }
-);
-
-
-/* =========================================
-   RESET ZOOM
-========================================= */
-
-zoomResetBtn.addEventListener(
-    "click",
-    function(event){
-
-        event.stopPropagation();
-
-
-        currentZoom =
-            1;
-
-        translateX =
-            0;
-
-        translateY =
-            0;
-
-
-        updateZoom();
-
-    }
-);
-
-
-/* =========================================
-   MOUSE WHEEL ZOOM
-========================================= */
-
-reviewPopup.addEventListener(
-    "wheel",
-    function(event){
-
-        if(
-            !reviewPopup.classList.contains(
-                "active"
-            )
-        ){
-
-            return;
-
-        }
-
-
-        event.preventDefault();
-
-
-        if(event.deltaY < 0){
-
-            currentZoom =
-                Math.min(
-                    currentZoom + .15,
-                    4
-                );
-
-        }
-        else{
-
-            currentZoom =
-                Math.max(
-                    currentZoom - .15,
-                    .5
-                );
-
-        }
-
-
-        if(currentZoom <= 1){
-
-            translateX =
-                0;
-
-            translateY =
-                0;
-
-        }
-
-
-        updateZoom();
-
-    },
-    {
-        passive:false
-    }
-);
-
-
-/* =========================================
-   DRAG IMAGE
-========================================= */
-
-reviewPopupImage.addEventListener(
-    "mousedown",
-    function(event){
-
-        if(currentZoom <= 1){
-            return;
-        }
-
-
-        isDragging =
-            true;
-
-
-        reviewPopupImage.classList.add(
-            "dragging"
-        );
-
-
-        dragStartX =
-            event.clientX;
-
-
-        dragStartY =
-            event.clientY;
-
-
-        startTranslateX =
-            translateX;
-
-
-        startTranslateY =
-            translateY;
-
-
-        event.preventDefault();
-
-    }
-);
-
-
-document.addEventListener(
-    "mousemove",
-    function(event){
-
-        if(!isDragging){
-            return;
-        }
-
-
-        translateX =
-            startTranslateX +
-            (
-                event.clientX -
-                dragStartX
-            );
-
-
-        translateY =
-            startTranslateY +
-            (
-                event.clientY -
-                dragStartY
-            );
-
-
-        updateZoom();
-
-    }
-);
-
-
-document.addEventListener(
-    "mouseup",
-    function(){
-
-        isDragging =
-            false;
-
-
-        reviewPopupImage.classList.remove(
-            "dragging"
-        );
-
-    }
-);
-
-
-/* =========================================
-   TOUCH SUPPORT
-========================================= */
-
-let touchStartX = 0;
-let touchStartY = 0;
-
-let touchStartTranslateX = 0;
-let touchStartTranslateY = 0;
-
-
-reviewPopupImage.addEventListener(
-    "touchstart",
-    function(event){
-
-        if(
-            event.touches.length !== 1 ||
-            currentZoom <= 1
-        ){
-
-            return;
-
-        }
-
-
-        touchStartX =
-            event.touches[0].clientX;
-
-
-        touchStartY =
-            event.touches[0].clientY;
-
-
-        touchStartTranslateX =
-            translateX;
-
-
-        touchStartTranslateY =
-            translateY;
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-reviewPopupImage.addEventListener(
-    "touchmove",
-    function(event){
-
-        if(
-            event.touches.length !== 1 ||
-            currentZoom <= 1
-        ){
-
-            return;
-
-        }
-
-
-        event.preventDefault();
-
-
-        translateX =
-            touchStartTranslateX +
-            (
-                event.touches[0].clientX -
-                touchStartX
-            );
-
-
-        translateY =
-            touchStartTranslateY +
-            (
-                event.touches[0].clientY -
-                touchStartY
-            );
-
-
-        updateZoom();
-
-    },
-    {
-        passive:false
-    }
-);
-
-
-/* =========================================
-   CLOSE EVENTS
-========================================= */
-
-reviewPopupClose.addEventListener(
-    "click",
-    function(){
-
-        closeReviewPopup();
-
-    }
-);
-
-
-reviewPopup.addEventListener(
-    "click",
-    function(event){
-
-        if(
-            event.target === reviewPopup
-        ){
-
-            closeReviewPopup();
-
-        }
-
-    }
-);
-
-
-document.addEventListener(
-    "keydown",
-    function(event){
-
-        if(
-            event.key === "Escape" &&
-            reviewPopup.classList.contains(
-                "active"
-            )
-        ){
-
-            closeReviewPopup();
-
-        }
-
-    }
-);
-
-
-/* =========================================
    SECURITY HELPERS
 ========================================= */
 
 function escapeHTML(value){
 
     return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
@@ -2285,8 +1138,14 @@ function escapeHTML(value){
 function escapeAttribute(value){
 
     return String(value)
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
@@ -2296,8 +1155,6 @@ function escapeAttribute(value){
 ========================================= */
 
 loadDownloads();
-
-loadReviews();
 
 </script>
 
