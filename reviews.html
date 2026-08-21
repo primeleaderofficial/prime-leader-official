@@ -216,6 +216,8 @@ body:before{
     overflow:hidden;
 
     position:relative;
+
+    cursor:pointer;
 }
 
 .review-image:after{
@@ -254,6 +256,55 @@ body:before{
 
     transform:
         scale(1.035);
+}
+
+
+/* ==========================================
+   CLICK INDICATOR
+========================================== */
+
+.review-image:before{
+
+    content:"CLICK TO VIEW";
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    z-index:2;
+
+    padding:7px 10px;
+
+    background:
+        rgba(0,0,0,.75);
+
+    border:
+        1px solid rgba(255,255,255,.18);
+
+    border-radius:5px;
+
+    color:#fff;
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    opacity:0;
+
+    transition:.25s;
+
+    pointer-events:none;
+}
+
+.review-image:hover:before{
+
+    opacity:1;
 }
 
 
@@ -311,6 +362,208 @@ body:before{
     box-shadow:
         0 0 8px
         rgba(230,0,0,.5);
+}
+
+
+/* ==========================================
+   IMAGE POPUP / LIGHTBOX
+========================================== */
+
+.image-popup{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:99999;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:25px;
+
+    background:
+        rgba(0,0,0,.90);
+
+    backdrop-filter:
+        blur(9px);
+
+    -webkit-backdrop-filter:
+        blur(9px);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:
+        opacity .25s ease,
+        visibility .25s ease;
+}
+
+.image-popup.active{
+
+    opacity:1;
+
+    visibility:visible;
+}
+
+
+/* ==========================================
+   POPUP CONTENT
+========================================== */
+
+.popup-content{
+
+    position:relative;
+
+    max-width:95vw;
+
+    max-height:92vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    transform:
+        scale(.90);
+
+    transition:
+        transform .30s ease;
+}
+
+.image-popup.active
+.popup-content{
+
+    transform:
+        scale(1);
+}
+
+
+/* ==========================================
+   POPUP IMAGE
+========================================== */
+
+.popup-image{
+
+    display:block;
+
+    max-width:90vw;
+
+    max-height:86vh;
+
+    width:auto;
+
+    height:auto;
+
+    object-fit:contain;
+
+    border-radius:10px;
+
+    border:
+        1px solid #3a3a3a;
+
+    box-shadow:
+        0 25px 100px
+        rgba(0,0,0,.85);
+}
+
+
+/* ==========================================
+   CLOSE BUTTON
+========================================== */
+
+.popup-close{
+
+    position:absolute;
+
+    top:-18px;
+
+    right:-18px;
+
+    width:42px;
+
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:
+        1px solid #444;
+
+    border-radius:50%;
+
+    background:#111;
+
+    color:#fff;
+
+    font-size:23px;
+
+    font-weight:bold;
+
+    line-height:1;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    z-index:5;
+}
+
+.popup-close:hover{
+
+    background:#e60000;
+
+    border-color:#e60000;
+
+    transform:
+        rotate(90deg);
+}
+
+
+/* ==========================================
+   POPUP CUSTOMER NAME
+========================================== */
+
+.popup-name{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:-45px;
+
+    transform:
+        translateX(-50%);
+
+    color:#fff;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    white-space:nowrap;
+
+    padding:
+        8px 15px;
+
+    background:#101010;
+
+    border:
+        1px solid #333;
+
+    border-radius:6px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.4);
 }
 
 
@@ -601,6 +854,56 @@ body:before{
 
     }
 
+    .review-image:before{
+
+        font-size:7px;
+
+        padding:
+            5px 7px;
+
+    }
+
+    .image-popup{
+
+        padding:15px;
+
+    }
+
+    .popup-image{
+
+        max-width:94vw;
+
+        max-height:82vh;
+
+        border-radius:7px;
+
+    }
+
+    .popup-close{
+
+        top:-12px;
+
+        right:-8px;
+
+        width:36px;
+
+        height:36px;
+
+        font-size:19px;
+
+    }
+
+    .popup-name{
+
+        bottom:-40px;
+
+        font-size:10px;
+
+        padding:
+            7px 11px;
+
+    }
+
     .back-button{
 
         margin-top:30px;
@@ -713,6 +1016,43 @@ body:before{
 
 
 
+<!-- ==========================================
+     IMAGE POPUP
+========================================== -->
+
+<div
+    id="imagePopup"
+    class="image-popup">
+
+    <div class="popup-content">
+
+        <button
+            type="button"
+            id="popupClose"
+            class="popup-close"
+            aria-label="Close">
+
+            ×
+
+        </button>
+
+        <img
+            id="popupImage"
+            class="popup-image"
+            src=""
+            alt="Customer Review">
+
+        <div
+            id="popupName"
+            class="popup-name">
+        </div>
+
+    </div>
+
+</div>
+
+
+
 <script>
 
 /* ==========================================
@@ -734,13 +1074,150 @@ const supabaseClient =
 
 
 /* ==========================================
-   ELEMENT
+   ELEMENTS
 ========================================== */
 
 const reviewGrid =
     document.getElementById(
         "reviewGrid"
     );
+
+
+const imagePopup =
+    document.getElementById(
+        "imagePopup"
+    );
+
+
+const popupImage =
+    document.getElementById(
+        "popupImage"
+    );
+
+
+const popupClose =
+    document.getElementById(
+        "popupClose"
+    );
+
+
+const popupName =
+    document.getElementById(
+        "popupName"
+    );
+
+
+/* ==========================================
+   OPEN IMAGE POPUP
+========================================== */
+
+function openImagePopup(
+    imageUrl,
+    customerName
+){
+
+    popupImage.src =
+        imageUrl;
+
+    popupImage.alt =
+        customerName ||
+        "Customer Review";
+
+    popupName.textContent =
+        customerName ||
+        "Customer Review";
+
+    imagePopup.classList.add(
+        "active"
+    );
+
+    document.body.style.overflow =
+        "hidden";
+}
+
+
+/* ==========================================
+   CLOSE IMAGE POPUP
+========================================== */
+
+function closeImagePopup(){
+
+    imagePopup.classList.remove(
+        "active"
+    );
+
+    document.body.style.overflow =
+        "";
+
+    setTimeout(
+        function(){
+
+            popupImage.src =
+                "";
+
+        },
+        250
+    );
+
+}
+
+
+/* ==========================================
+   CLOSE BUTTON
+========================================== */
+
+popupClose.addEventListener(
+    "click",
+    function(){
+
+        closeImagePopup();
+
+    }
+);
+
+
+/* ==========================================
+   CLICK OUTSIDE IMAGE
+========================================== */
+
+imagePopup.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            imagePopup
+        ){
+
+            closeImagePopup();
+
+        }
+
+    }
+);
+
+
+/* ==========================================
+   ESC KEY
+========================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Escape" &&
+            imagePopup.classList.contains(
+                "active"
+            )
+        ){
+
+            closeImagePopup();
+
+        }
+
+    }
+);
 
 
 /* ==========================================
@@ -767,21 +1244,28 @@ async function loadReviews(){
         const {
             data,
             error
-        } = await supabaseClient
+        } =
+            await supabaseClient
 
-            .from("customer_reviews")
+                .from(
+                    "customer_reviews"
+                )
 
-            .select(
-                "id, customer_name, screenshot_url, created_at"
-            )
+                .select(
+                    "id, customer_name, screenshot_url, created_at"
+                )
 
-            .order(
-                "created_at",
-                {
-                    ascending:false
-                }
-            );
+                .order(
+                    "created_at",
+                    {
+                        ascending:false
+                    }
+                );
 
+
+        /* ======================================
+           ERROR
+        ====================================== */
 
         if(error){
 
@@ -789,6 +1273,7 @@ async function loadReviews(){
                 "Reviews Error:",
                 error
             );
+
 
             reviewGrid.innerHTML = `
 
@@ -808,6 +1293,10 @@ async function loadReviews(){
 
         }
 
+
+        /* ======================================
+           EMPTY
+        ====================================== */
 
         if(
             !data ||
@@ -829,8 +1318,16 @@ async function loadReviews(){
         }
 
 
+        /* ======================================
+           CLEAR LOADING
+        ====================================== */
+
         reviewGrid.innerHTML = "";
 
+
+        /* ======================================
+           CREATE CARDS
+        ====================================== */
 
         data.forEach(
             function(review){
@@ -847,15 +1344,16 @@ async function loadReviews(){
 
                 card.innerHTML = `
 
-                    <div class="review-image">
+                    <div
+                        class="review-image">
 
                         <img
 
-                            src="${escapeHTML(
+                            src="${escapeAttribute(
                                 review.screenshot_url
                             )}"
 
-                            alt="${escapeHTML(
+                            alt="${escapeAttribute(
                                 review.customer_name ||
                                 "Customer Review"
                             )}"
@@ -867,9 +1365,11 @@ async function loadReviews(){
                     </div>
 
 
-                    <div class="review-info">
+                    <div
+                        class="review-info">
 
-                        <div class="review-name">
+                        <div
+                            class="review-name">
 
                             ${escapeHTML(
                                 review.customer_name ||
@@ -882,6 +1382,33 @@ async function loadReviews(){
 
                 `;
 
+
+                /* ==================================
+                   IMAGE CLICK
+                ================================== */
+
+                const reviewImage =
+                    card.querySelector(
+                        ".review-image"
+                    );
+
+
+                reviewImage.addEventListener(
+                    "click",
+                    function(){
+
+                        openImagePopup(
+                            review.screenshot_url,
+                            review.customer_name
+                        );
+
+                    }
+                );
+
+
+                /* ==================================
+                   ADD CARD
+                ================================== */
 
                 reviewGrid.appendChild(
                     card
@@ -955,12 +1482,49 @@ function escapeHTML(value){
 
 
 /* ==========================================
+   ESCAPE ATTRIBUTE
+========================================== */
+
+function escapeAttribute(value){
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        );
+
+}
+
+
+/* ==========================================
    START
 ========================================== */
 
 loadReviews();
 
 </script>
+
 
 </body>
 </html>
