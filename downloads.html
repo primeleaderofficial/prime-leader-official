@@ -378,7 +378,10 @@ body:before{
     }
 }
 </style>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
 
 <body>
@@ -720,6 +723,12 @@ body:before{
 <script>
 
 const SUPABASE_URL = "https://qelvvvldriqtialnpelk.supabase.co";
+
+/*
+    IMPORTANT:
+    Replace YOUR_PUBLISHABLE_KEY with your own
+    sb_publishable_... key.
+*/
 const SUPABASE_KEY = "sb_publishable_1-FLjKgb3U8xZyA_sWQ0Ow_LzNYl8ed";
 
 const supabaseClient = supabase.createClient(
@@ -730,7 +739,7 @@ const supabaseClient = supabase.createClient(
 
 // TAB SYSTEM
 
-function showDownloadTab(tabId, button){
+function showDownloadTab(tabId,button){
 
     document
         .querySelectorAll('.download-tab-content')
@@ -752,7 +761,7 @@ function showDownloadTab(tabId, button){
 }
 
 
-// LOAD DOWNLOADS
+// LOAD DOWNLOADS FROM SUPABASE
 
 async function loadDownloads(){
 
@@ -769,7 +778,63 @@ async function loadDownloads(){
     }
 
     console.log("Downloads loaded:", data);
+
+    data.forEach(function(download){
+
+        const card = document.createElement('article');
+
+        card.className = 'download-card';
+
+        card.innerHTML = `
+            <div class="download-icon">↓</div>
+
+            <div class="download-info">
+
+                <span class="download-type">
+                    ${(download.category || 'DOWNLOAD').toUpperCase()}
+                </span>
+
+                <h2>${download.name}</h2>
+
+                <p>
+                    ${download.description || ''}
+                </p>
+
+                <small>
+                    PRIME LEADER • Download
+                </small>
+
+                <div class="source">
+                    <span class="source-dot"></span>
+                    Official Download
+                </div>
+
+            </div>
+
+            <a class="download-btn"
+                href="${download.download_url}"
+                target="_blank"
+                rel="noopener">
+                DOWNLOAD ↗
+            </a>
+        `;
+
+        const category = (download.category || 'tools').toLowerCase();
+
+        const section = document.getElementById(category);
+
+        if(section){
+
+            section.appendChild(card);
+
+        }
+
+    });
+
 }
+
+
+// START
 
 loadDownloads();
 
